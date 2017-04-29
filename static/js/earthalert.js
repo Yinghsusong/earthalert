@@ -19,6 +19,7 @@ function update( position ){
 		lon = position.coords.longitude;
 		var center = new google.maps.LatLng(lat, lon)
 		map.panTo( center );
+		map.setZoom(10);
 		warning_level(lat,lon);
 	} else {
 		get_location();
