@@ -21,5 +21,5 @@ class Event(Base):
 			setattr(self,key,value)
 
 if __name__=='__main__':
-	db_engine = create_engine( 'earthalert.db' )
+	db_engine = create_engine( 'sqlite:///earthalert.db' )
 	Base.metadata.create_all(db_engine)
