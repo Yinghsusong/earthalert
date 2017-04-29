@@ -25,11 +25,17 @@ def index():
 	events = session.query( models.Event ).all()
 	return render_template( 'index.html', events=events )
 
-# this is the index page. Going to http://localhost:5000/ when the
-# project is running will bring you here
-
-@app.route("/report", methods=[ 'GET', 'POST'])
+@app.route("/report", methods=['POST'])
 def report():
+	lat = request.values.get('lat')
+	lon = request.values.get('lon')
+	event = Event( lat, lon )
+	session.add(  )
+
+
+
+@app.route("/notify_me", methods=[ 'GET', 'POST'])
+def notify_me():
 	number =''
 	if request.method == "POST":
 		number = request.values.get('number')
@@ -70,10 +76,12 @@ def fetch():
 	else:
 		return get_geo_json()
 
-@app.route("/warning_level", methods=['POST'])
+@app.route("/warning_level", methods=['GET'])
 def warning_level():
-	alert_level = request.values.get('alert_level')
-	print(alert_level)
+	lat = request.values.get('lat')
+	lon = request.values.get('lon')
+	danger_level = alert_level(lat, lon)
+	return danger_level
 
 if __name__ == "__main__":
 	app.debug = True

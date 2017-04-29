@@ -15,13 +15,28 @@ function decline_pos( error ){
 
 function update( position ){
 	if(position){
-		lat = position.coords.latitude;
-		lon = position.coords.longitude;
-		var center = new google.maps.LatLng(lat, lon)
+		window.lat = position.coords.latitude;
+		window.lon = position.coords.longitude;
+		var center = new google.maps.LatLng(window.lat, window.lon)
 		map.panTo( center );
+		map.setZoom(10);
 	} else {
 		get_location();
 	}
+}
+
+function warning_level(lat, lon){
+	var request = new XMLHttpRequest();
+	url = '/warning_level?lon='+lon+'&lat='+lat;
+
+	request.onreadystatechange = function() {
+	if (request.readyState == 4 && request.status == 200){
+			var level = request.responseText;
+			console.log(level);
+		}
+	}
+	request.open("GET", url, true); // true for asynchronous
+	request.send(null);
 }
 
 update();
