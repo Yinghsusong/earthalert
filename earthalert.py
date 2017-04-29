@@ -71,7 +71,7 @@ def fetch():
 		return get_geo_json()
 
 @app.route("/warning_level", methods=['POST'])
-def fetch():
+def warning_level():
 	alert_level = request.values.get('alert_level')
 	print(alert_level)
 
