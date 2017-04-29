@@ -5,8 +5,12 @@
 		<link href="static/css/report.css" rel="stylesheet" type="text/stylesheet" />
 	</head>
 	<body>
-		<form>
-			<!-- stuff here -->
+		<form action="/report" method="POST">
+			<input type="text" name="number" required>
+			<input id="lat" type="hidden" name="lat" value="">
+			<input id="lon" type="hidden" name="lon" value="">
+			<input type="submit" value="Send">
 		</form>
+		<script src="static/js/earthalert.js"></script>
 	</body>
 </html>

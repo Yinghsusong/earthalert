@@ -1,6 +1,6 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
+
 
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -52,19 +52,26 @@
         <h4>Landing Page</h4>
         
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut diam non nisl fringilla fringilla. Maecenas porttitor tempor ante sit amet vulputate. Fusce eu dui dui. Vivamus commodo hendrerit dui, id egestas odio porttitor ac. Aliquam erat volutpat. Suspendisse ut consequat tortor. Donec vel molestie felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer cursus suscipit nisl, eu laoreet enim efficitur vitae. Proin cursus molestie imperdiet. Praesent dapibus nibh risus, ac tincidunt lectus semper a. Phasellus vitae consequat turpis. Fusce arcu est, tempor ut gravida vel, eleifend tincidunt est.
+  <div id="map"></div>
+    <script>
+      var map;
+  function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: {lat: -28, lng: 137}
+            });
 
-Quisque mattis enim sit amet ipsum placerat, eu condimentum arcu accumsan. Curabitur imperdiet nunc sed turpis posuere, nec condimentum quam accumsan. Aenean dictum sagittis sapien sit amet sodales. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean non nibh tellus. Suspendisse iaculis porta eleifend. Cras arcu nulla, auctor eu tempor sit amet, sollicitudin et dui. Fusce tempor elementum justo. Donec fermentum elit turpis, id elementum arcu cursus non. Nulla feugiat justo tincidunt, ultrices justo non, pulvinar risus. Aliquam vehicula consequat elit eu sagittis. Sed rutrum nisl et mollis volutpat.
-
-Quisque feugiat ut ex vel malesuada. Maecenas volutpat lorem in diam euismod scelerisque. Morbi facilisis augue mi, ac fringilla augue maximus eu. Mauris molestie tempus elit, et porta massa dapibus ut. Sed scelerisque metus vitae elit vestibulum lobortis. Nam quis accumsan tellus. Nulla urna nunc, faucibus nec risus in, tincidunt tempus nunc. Sed at rhoncus tortor. Cras sit amet auctor mi. Nunc porta ut tortor et maximus. Morbi porta pretium tempor. Praesent ullamcorper laoreet aliquam. Maecenas dictum ex sit amet lorem luctus pretium. Ut interdum, elit eu tincidunt auctor, neque turpis volutpat nulla, nec blandit metus quam fermentum leo. In quam ante, rutrum at massa quis, aliquet pharetra orci. Aliquam erat volutpat.
-
-Nullam tincidunt velit neque, sed dictum orci imperdiet venenatis. Nulla nec est id odio pulvinar volutpat a ut dui. Nulla sit amet lacus orci. Etiam at ex vel lorem sollicitudin molestie ac non sapien. Aenean at dictum nisi. Nam consectetur volutpat posuere. Sed porta elementum ex, vel luctus sapien laoreet sit amet. Vestibulum purus orci, faucibus nec blandit et, mattis tempus nulla. Morbi non nisl ac nisi consequat tristique. Nulla augue nulla, tempor eu lorem et, facilisis cursus risus. Nullam sollicitudin dui euismod dolor suscipit laoreet. Donec sed eleifend mauris. Mauris at metus tempus nunc dapibus tempus. Cras vulputate id sapien eu varius. Curabitur id euismod libero. Etiam vitae massa sapien.
-
-Vivamus commodo dictum nibh. Mauris sed dolor a justo porttitor tempus ac quis leo. Sed sodales mollis ipsum, nec tempus diam auctor at. Nulla suscipit congue ex non accumsan. Vivamus non dui convallis, dapibus arcu in, pellentesque magna. Sed orci ex, molestie eu dictum in, posuere sit amet dui. Quisque finibus velit eu accumsan mattis. Donec sit amet elementum velit, nec porttitor lacus. Aenean ipsum velit, vestibulum quis libero id, consequat aliquam sem. 
+  // NOTE: This uses cross-domain XHR, and may not work on older browsers.
+  map.data.loadGeoJson(
+      'https://pmmpublisher.pps.eosdis.nasa.gov/products/global_landslide_nowcast_30mn/export/Global/2017/118/global_landslide_nowcast_30mn.20170428.230000.geojson');
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqZYLz6Y4lJGuBatmPuHJxPt-Y75kNag&callback=initMap"
+    async defer></script>
       </div>
-    </div>
-  </div>
-        </div>
+        </div><!--Row -->
+  </div><!--Container -->
+        </div><!--Landing Container -->
     
     <div class="searchContainer">
         <div class="container">
@@ -76,6 +83,7 @@ Vivamus commodo dictum nibh. Mauris sed dolor a justo porttitor tempus ac quis l
         </div>
     </div>
 
+
     
     
     
@@ -86,10 +94,16 @@ Vivamus commodo dictum nibh. Mauris sed dolor a justo porttitor tempus ac quis l
                 <li>Upload</li>
                 <li>Search</li>
                 <li>Reporting</li>
-            </ul></div>
+            </ul>
+        </div>
     </div>
     
-    </div>
+    </div><!--Main Website Content -->
+
+  
+
+  
+
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
