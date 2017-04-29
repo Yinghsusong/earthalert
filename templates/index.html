@@ -34,16 +34,17 @@
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div class="navigation overlay">
-        <div class="navLogo">.SlIDe</div>
-        <div class="navLinks">
-            <ul>
-                <li>Upload Media</li>
-                <li></li>
-            </ul>
+        <div class="navLogo">
+            <img src="../static/images/grey-logo.png">
         </div>
-    </div>
-    <div class="numberRequest">
+        <div class="headerText"><p>Slide</p></div>
         
+    </div>
+    <div class="numberRequest overlay" style="z-index:15">
+        <div class="nrText">Give us your number for up to the minute reporting!</div>
+        <div class="nrField">
+            <input placeholder="0 000 555 555" id="numberRequestField" type="number">
+        </div>
     </div>
     
     
@@ -53,7 +54,6 @@
 
 <div class="content">
     <div class="landingContainer">
-        <h4>Landing Page</h4>
 
   <div id="map"></div>
     <script>
@@ -91,13 +91,14 @@
 
 
     <div class="footer overlay">
-        <div class="footerLogo"></div>
+        <div class="container">
         <div class="footerLinks">
             <ul>
-                <li>Upload</li>
-                <li>Search</li>
-                <li>Reporting</li>
+                <li><img src="../static/images/upload.png">Upload</li>
+                <li><img src="../static/images/search.png">Search</li>
+                <li><img src="../static/images/edit.png">Reporting</li>
             </ul>
+        </div>
         </div>
     </div>
 
