@@ -81,5 +81,11 @@ def alert_level(lat, lon):
 	    if polygon.contains(point):
 	        # print('Found containing polygon:', feature)
 	        danger_level = feature['properties']['nowcast']
+
+<<<<<<< HEAD
 	return str(danger_level)
 
+
+=======
+	return danger_level
+>>>>>>> ef7f6d446521e82b88a6b65ca45d9ac7556a3725

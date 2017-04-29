@@ -68,11 +68,12 @@ def alert_level(lat, lon):
 	geo_json=get_geo_json()
 	danger_level = 0
 	js = json.loads(geo_json)
+
 	#with open(geo_json) as f:
 	 #   js = json.load(f)
 
 	# construct point based on lon/lat returned by geocoder
-	point = Point(float(lat), float(lon))
+	point = Point(lat, lon)
 
 	# check each polygon to see if it contains the point
 	for feature in js['features']:
@@ -81,5 +82,5 @@ def alert_level(lat, lon):
 	    if polygon.contains(point):
 	        # print('Found containing polygon:', feature)
 	        danger_level = feature['properties']['nowcast']
-	return str(danger_level)
 
+	return danger_level
