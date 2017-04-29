@@ -2,6 +2,7 @@
 # outside imports
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from twilio.rest import Client
 from flask import Flask, request, render_template, make_response
 
 # local imports
@@ -33,6 +34,14 @@ def report():
 		if number:
 			person = models.Person()
 			person.phone = number
+			account_sid = 'ACb9b3ae8e3b69b1fba8a0f14b9faf2042'
+			auth_token = '885b48598f6934e4f98df504efe239a4'
+			"""client = Client(account_sid,auth_token)
+			message = client.messages.create(
+				to = '+12566985523',
+				from_ = '+12563611028',
+				body = 'This is a test message for the website')
+			print(message.sid)"""
 		return render_template( 'report.html', number=number)
 	else:
 		return render_template( 'report.html')
