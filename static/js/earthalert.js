@@ -27,18 +27,16 @@ function update( position ){
 
 function warning_level(lat, lon){
 	var request = new XMLHttpRequest();
-	url = '/fetch?lon='+lon+'&lat='+lat;
+	url = '/warning_level?lon='+lon+'&lat='+lat;
 
 	request.onreadystatechange = function() {
 	if (request.readyState == 4 && request.status == 200){
-		var geo_json = JSON.loads(console.log(request.responseText));
+			var level = request.responseText;
+			console.log(level);
 		}
 	}
 	request.open("GET", url, true); // true for asynchronous
 	request.send(null);
-
-	point = stream.point(lat, lon);
-	var indicator = d3.geoContains(geo_json, point);
 }
 
 update();

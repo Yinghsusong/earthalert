@@ -70,7 +70,7 @@ def fetch():
 	else:
 		return get_geo_json()
 
-@app.route("/warning_level", methods=['POST'])
+@app.route("/warning_level", methods=['GET'])
 def warning_level():
 	lat = request.values.get('lat')
 	lon = request.values.get('lon')
