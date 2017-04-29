@@ -15,12 +15,11 @@ function decline_pos( error ){
 
 function update( position ){
 	if(position){
-		lat = position.coords.latitude;
-		lon = position.coords.longitude;
-		var center = new google.maps.LatLng(lat, lon)
+		window.lat = position.coords.latitude;
+		window.lon = position.coords.longitude;
+		var center = new google.maps.LatLng(window.lat, window.lon)
 		map.panTo( center );
 		map.setZoom(10);
-		warning_level(lat,lon);
 	} else {
 		get_location();
 	}
