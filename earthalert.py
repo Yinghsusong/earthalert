@@ -72,8 +72,11 @@ def fetch():
 
 @app.route("/warning_level", methods=['POST'])
 def warning_level():
-	alert_level = request.values.get('alert_level')
-	print(alert_level)
+	lat = request.values.get('lat')
+	lon = request.values.get('lon')
+	danger_level = alert_level(lat, lon)
+	return danger_level
+	print(danger_level)
 
 if __name__ == "__main__":
 	app.debug = True

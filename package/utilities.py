@@ -1,6 +1,8 @@
 from datetime import datetime
 import requests
 from pprint import pprint
+import json
+from shapely.geometry import shape, Point
 
 def get_datetime_str():
 	return datetime.now().strftime('%Y-%m-%d')
@@ -61,6 +63,24 @@ def get_polygons( lat, lon ):
 		geo_data = requests.get(geojson)
 		pprint( geo_data )
 
+def alert_level(lat, lon):
+	# load GeoJSON file containing sectors
+	geo_json=get_geo_json()
+	danger_level = 0
+	js = json.loads(geo_json)
 
-if __name__=='__main__':
-	pass
+	#with open(geo_json) as f:
+	 #   js = json.load(f)
+
+	# construct point based on lon/lat returned by geocoder
+	point = Point(lat, lon)
+
+	# check each polygon to see if it contains the point
+	for feature in js['features']:
+	    polygon = shape(feature['geometry'])
+	    center = polygon.centroid
+	    if polygon.contains(point):
+	        # print('Found containing polygon:', feature)
+	        danger_level = feature['properties']['nowcast']
+
+	return danger_level
