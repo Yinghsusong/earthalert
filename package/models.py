@@ -74,5 +74,3 @@ if __name__=='__main__':
 	for event in events:
 		session.add( event )
 	session.commit()
-params={'q':'precip_30mn_3hr','lat':'34.753542','lon':'-86.614791','limit':'10'}
-r = requests.get('https://pmmpublisher.pps.eosdis.nasa.gov/opensearch ')
