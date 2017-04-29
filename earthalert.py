@@ -2,10 +2,13 @@
 # outside imports
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from twilio.rest import Client
 from flask import Flask, request, render_template, make_response
+import json
 
 # local imports
 from package import models
+from package.utilities import *
 
 # initial setup
 db_engine = create_engine( 'sqlite:///earthalert.db' )
@@ -35,14 +38,42 @@ def report():
 		if number:
 			person = models.Person()
 			person.set( lat, lon, number )
-			session.add( person )
-			session.commit()
+			try:
+				session.add( person )
+				session.commit()
+				account_sid = 'ACb9b3ae8e3b69b1fba8a0f14b9faf2042'
+				auth_token = '885b48598f6934e4f98df504efe239a4'
+				"""client = Client(account_sid,auth_token)
+				message = client.messages.create(
+					to = '+12566985523',
+					from_ = '+12563611028',
+					body = 'This is a test message for the website')
+				print(message.sid)"""
+			except:
+				session.rollback()
+				try:
+					person = session.query(Person).filter(Person.phone==number).first()
+					person.set( number, lat, lon )
+					session.commit()
+				except:
+					pass
 		return render_template( 'report.html' )
 	else:
 		return render_template( 'report.html')
 
+@app.route("/fetch", methods=['GET'])
+def fetch():
+	lat = request.values.get('lat')
+	lon = request.values.get('lon')
+	if lat and lon:
+		return get_geo_json( lat, lon )
+	else:
+		return get_geo_json()
 
-
+@app.route("/warning_level", methods=['POST'])
+def warning_level():
+	alert_level = request.values.get('alert_level')
+	print(alert_level)
 
 if __name__ == "__main__":
 	app.debug = True

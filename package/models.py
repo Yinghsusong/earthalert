@@ -23,7 +23,7 @@ class Event(Base):
 class Person(Base):
 	__tablename__= 'people'
 	id = Column(Integer, primary_key=True)
-	phone = Column(String(250))
+	phone = Column(String(250), unique=True)
 	latitude = Column(String(250))
 	longitude = Column(String(250))
 

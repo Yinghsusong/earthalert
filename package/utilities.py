@@ -1,15 +1,16 @@
 from datetime import datetime
+import requests
 
 def get_datetime_str():
 	return datetime.now().strftime('%Y-%m-%d')
 
-def get_geo_json(timeStamp, lat=0, lon=0):
+def get_geo_json( lat=0, lon=0):
 	base_url = 'https://pmmpublisher.pps.eosdis.nasa.gov/opensearch?q=global_landslide_nowcast_30mn'
 	lat_value = 'lat=' + str(lat)
 	lon_value = 'lon=' + str(lon)
 	limit = 'limit=1'
-	startTime = 'startTime=' + str(timeStamp)
-	endTime = 'endTime=' + str(timeStamp)
+	startTime = 'startTime=' + str(get_datetime_str())
+	endTime = 'endTime=' + str(get_datetime_str())
 	url = '&'.join([base_url, lat_value, lon_value, limit, startTime, endTime])
 	results = requests.get(url)
 	json_data = results.json()
@@ -32,7 +33,7 @@ def get_geo_json(timeStamp, lat=0, lon=0):
 											if key == '@id' and value == 'style':
 												color_url = data_dict['url']
 
-	geo_json = requests.get(geo_url).json()
+	geo_json = requests.get(geo_url).text
 	#legend = requests.get(legend_url).json()
-	color_table = requests.get(color_url).json()
+	color_table = requests.get(color_url).text
 	return geo_json
