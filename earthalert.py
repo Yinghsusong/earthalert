@@ -29,11 +29,15 @@ def index():
 def report():
 	number =''
 	if request.method == "POST":
-		number = request.values.get('text')
+		number = request.values.get('number')
+		lat = request.values.get('lat', None)
+		lon = request.values.get('lon', None)
 		if number:
 			person = models.Person()
-			person.phone = number
-		return render_template( 'report.html', number=number)
+			person.set( lat, lon, number )
+			session.add( person )
+			session.commit()
+		return render_template( 'report.html' )
 	else:
 		return render_template( 'report.html')
 
