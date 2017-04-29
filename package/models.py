@@ -27,8 +27,8 @@ class Person(Base):
 	latitude = Column(String(250))
 	longitude = Column(String(250))
 
-	def SetInfo(self, latitude, longitude, phoneNumber):
-		self.phone = phoneNumber
+	def set(self, latitude, longitude, phone):
+		self.phone = phone
 		self.latitude = latitude
 		self.longitude = longitude
 

@@ -6,9 +6,11 @@
 	</head>
 	<body>
 		<form action="/report" method="POST">
-			<input type="number" name = "text" maxlength="10">
-			<input type="submit" name="my-form" value="Send" >
+			<input type="text" name="number" required>
+			<input id="lat" type="hidden" name="lat" value="">
+			<input id="lon" type="hidden" name="lon" value="">
+			<input type="submit" value="Send">
 		</form>
-		{{ number }}
+		<script src="static/js/earthalert.js"></script>
 	</body>
 </html>

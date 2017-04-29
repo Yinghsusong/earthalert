@@ -1,6 +1,7 @@
 <html lang="en">
 <head>
 
+
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
@@ -17,10 +18,11 @@
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
   <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="static/css/normalize.css">
-  <link rel="stylesheet" href="static/css/skeleton.css">
-  <link rel="stylesheet" href="static/css/main.css">
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->   
+  <link rel="stylesheet" type="text/css" href="../static/css/normalize.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="../static/css/skeleton.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="../static/css/main.css" media="screen" />
+
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -31,18 +33,74 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
-        <h4>Basic Page</h4>
-        <p></p>
-
-      </div>
+    <div class="navigation overlay">
+        <div class="navLogo">.SlIDe</div>
+        <div class="navLinks">
+            <ul>
+                <li>Upload Media</li>
+                <li></li>
+            </ul>
+        </div>
     </div>
-  </div>
+    
+    
+<div class="content">    
+    <div class="landingContainer">
+        <h4>Landing Page</h4>
+        
+
+  <div id="map"></div>
+    <script>
+      var map;
+  function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: {lat: -28, lng: 137}
+            });
+
+  // NOTE: This uses cross-domain XHR, and may not work on older browsers.
+  map.data.loadGeoJson(
+      'https://pmmpublisher.pps.eosdis.nasa.gov/products/global_landslide_nowcast_30mn/export/Global/2017/118/global_landslide_nowcast_30mn.20170428.230000.geojson');
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqZYLz6Y4lJGuBatmPuHJxPt-Y75kNag&callback=initMap"
+    async defer></script>
+
+  </div><!--Landing Container -->
+        </div><!--Landing Container -->
+    
+    <div class="searchContainer">
+        <div class="container">
+        </div>
+    </div>
+    
+    <div class="reportingContainer">
+        <div class="container">
+        </div>
+    </div>
+
+
+    
+    
+    
+    <div class="footer overlay">
+        <div class="footerLogo"></div>
+        <div class="footerLinks">
+            <ul>
+                <li>Upload</li>
+                <li>Search</li>
+                <li>Reporting</li>
+            </ul>
+        </div>
+    </div>
+    
+    </div><!--Main Website Content -->
+
+  
+
+  
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="static/js/earthalert.js"></script>
 </body>
 </html>

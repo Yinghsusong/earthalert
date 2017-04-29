@@ -26,13 +26,13 @@ def get_geo_json(timeStamp, lat=0, lon=0):
 										for key,value in elem.items():
 											if key == '@id' and value == 'geojson':
 												geo_url = (data_dict['url'])
-												
+
 											if key == '@id' and value =='legend':
 												legend_url = data_dict['url']
 											if key == '@id' and value == 'style':
 												color_url = data_dict['url']
 
-	geo_json = requests.get(geo_url).json()									
+	geo_json = requests.get(geo_url).json()
 	#legend = requests.get(legend_url).json()
-	color_table = requests.get(color_url).json()		
+	color_table = requests.get(color_url).json()
 	return geo_json
