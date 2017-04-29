@@ -3,9 +3,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from flask import Flask, request, render_template, make_response
+import json
 
 # local imports
 from package import models
+from package.utilities import *
 
 # initial setup
 db_engine = create_engine( 'sqlite:///earthalert.db' )
@@ -35,11 +37,35 @@ def report():
 		if number:
 			person = models.Person()
 			person.set( lat, lon, number )
-			session.add( person )
-			session.commit()
+			try:
+				session.add( person )
+				session.commit()
+			except:
+				session.rollback()
+				try:
+					person = session.query(Person).filter(Person.phone==number).first()
+					person.set( number, lat, lon )
+					session.commit()
+				except:
+					pass
 		return render_template( 'report.html' )
 	else:
 		return render_template( 'report.html')
+
+@app.route("/fetch", methods=['GET'])
+def fetch():
+	lat = request.values.get('lat')
+	lon = request.values.get('lon')
+	if lat and lon:
+		return get_geo_json( lat, lon )
+	else:
+		return get_geo_json()
+
+@app.route("/warning_level", methods=['POST'])
+def fetch():
+	alert_level = request.values.get('alert_level')
+	print(alert_level)
+
 
 
 
