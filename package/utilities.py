@@ -1,5 +1,8 @@
 from datetime import datetime
 import requests
+from pprint import pprint
+import json
+from shapely.geometry import shape, Point
 
 def get_datetime_str():
 	return datetime.now().strftime('%Y-%m-%d')
@@ -37,3 +40,47 @@ def get_geo_json( lat=0, lon=0):
 	#legend = requests.get(legend_url).json()
 	color_table = requests.get(color_url).text
 	return geo_json
+
+def get_polygons( lat, lon ):
+	dt = datetime.now().strftime('%Y-%m-%d')
+	url = 'https://pmmpublisher.pps.eosdis.nasa.gov/opensearch'
+	params = {
+		'q':'global_landslide_nowcast_30mn',
+		'lat':str(lat),
+		'lon':str(lon),
+		'limit':1,
+		'startTime':dt,
+		'endTime':dt
+	}
+	data = requests.get( url, params=params ).json()
+	geojson = None
+	for action in data['items'][0]['action']:
+		for item in action['using']:
+			if item['@id']=='geojson':
+				geojson = item['url']
+
+	if geojson:
+		geo_data = requests.get(geojson)
+		pprint( geo_data )
+
+def alert_level(lat, lon):
+	# load GeoJSON file containing sectors
+	geo_json=get_geo_json()
+	danger_level = 0
+	js = json.loads(geo_json)
+
+	#with open(geo_json) as f:
+	 #   js = json.load(f)
+
+	# construct point based on lon/lat returned by geocoder
+	point = Point(lat, lon)
+
+	# check each polygon to see if it contains the point
+	for feature in js['features']:
+	    polygon = shape(feature['geometry'])
+	    center = polygon.centroid
+	    if polygon.contains(point):
+	        # print('Found containing polygon:', feature)
+	        danger_level = feature['properties']['nowcast']
+
+	return danger_level
