@@ -2,6 +2,7 @@
 # outside imports
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from twilio.rest import Client
 from flask import Flask, request, render_template, make_response
 import json
 
@@ -40,6 +41,14 @@ def report():
 			try:
 				session.add( person )
 				session.commit()
+				account_sid = 'ACb9b3ae8e3b69b1fba8a0f14b9faf2042'
+				auth_token = '885b48598f6934e4f98df504efe239a4'
+				"""client = Client(account_sid,auth_token)
+				message = client.messages.create(
+					to = '+12566985523',
+					from_ = '+12563611028',
+					body = 'This is a test message for the website')
+				print(message.sid)"""
 			except:
 				session.rollback()
 				try:
@@ -65,10 +74,6 @@ def fetch():
 def fetch():
 	alert_level = request.values.get('alert_level')
 	print(alert_level)
-
-
-
-
 
 if __name__ == "__main__":
 	app.debug = True
