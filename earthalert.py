@@ -24,9 +24,18 @@ def index():
 
 # this is the index page. Going to http://localhost:5000/ when the
 # project is running will bring you here
-@app.route("/report")
+@app.route("/report", methods=[ 'GET', 'POST'])
 def report():
-	return render_template( 'report.html')
+	number =''
+	if request.method == "POST":
+		number = request.values.get('text')
+		if number:
+			person = models.Person()
+			person.phone = number
+		return render_template( 'report.html', number=number)
+	else:
+		return render_template( 'report.html')
 
 if __name__ == "__main__":
-    app.run()
+	app.debug = True
+	app.run()
