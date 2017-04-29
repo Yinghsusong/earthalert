@@ -3,8 +3,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-import csvx
-
 Base = declarative_base()
 
 class Event(Base):
@@ -64,13 +62,4 @@ def dump( dataset ):
 	return events
 
 if __name__=='__main__':
-	engine = create_engine('sqlite:///events.db')
-	Session = sessionmaker(bind=engine)
-	session = Session()
-
-	Base.metadata.create_all(engine)
-
-	events = dump( '/home/blankie/Work/python/earthalert/data/Global_Landslide_Catalog_Export.csv' )
-	for event in events:
-		session.add( event )
-	session.commit()
+	pass

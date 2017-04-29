@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Earth Alert</title>
+	</head>
+	<body>
+		{% for event in events %}
+			<div>id: {{ event.id }} type: {{ event.hazard_type }}</div>
+		{% endfor %}
+	</body>
+</html>
