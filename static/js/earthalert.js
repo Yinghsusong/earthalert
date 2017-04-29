@@ -25,17 +25,4 @@ function update( position ){
 	}
 }
 
-function get_geojson( lon, lat ){
-	var request = new XMLHttpRequest();
-	url = '/fetch?lon='+lon+'&lat='+lat;
-
-	request.onreadystatechange = function() {
-		if (request.readyState == 4 && request.status == 200){
-			map.data.loadGeoJson(request.responseText);
-		}
-	}
-	request.open("GET", url, true); // true for asynchronous
-	request.send(null);
-}
-
 update();
