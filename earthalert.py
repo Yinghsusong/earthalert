@@ -2,13 +2,13 @@
 # outside imports
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from flask import Flask
+from flask import Flask, request, render_template, make_response
 
 # local imports
 from package import models
 
 # initial setup
-db_engine = create_engine( 'earthalert.db' )
+db_engine = create_engine( 'sqlite:///earthalert.db' )
 session_generator = sessionmaker(bind=db_engine)
 session = session_generator()
 
