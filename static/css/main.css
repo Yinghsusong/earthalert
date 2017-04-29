@@ -3,3 +3,58 @@
 
 
 
+/*Initial Loading Container
+____________________________________*>
+
+
+/* Big Stuffs*/
+.content {
+    z-index: 0;
+}
+
+.overlay {
+    z-index: 10;
+    }
+
+
+
+/* Navigation */
+.navigation {
+    position: fixed;
+    height: 15vh;
+    background-color: green;
+    width: 100%
+}
+
+
+
+
+
+/*Footer */
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 20vh;
+    background-color: red;
+    width: 100%;
+}
+
+/* Larger than mobile */
+@media (min-width: 400px) {
+    
+    
+}
+
+
+/*Landing Container*/
+
+/*Search Container */
+
+/*Reporting Container*/
+
+
+
+
+
+
