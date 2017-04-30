@@ -49,10 +49,11 @@
 			<img src="/static/img/grey-logo.png">
 			<div id="header_text">Slide</div>
 		</div>
+         <div id="warning_box"></div>
     </div>
 
 
-    <div id="warning_box"></div>
+   
 
         <div id="mapContainer">
             <div id="map"></div>
@@ -75,12 +76,12 @@
         </div>
 
 	<input id="file_input" type="file" name="name" style="display:none;" />
-
+    
     <div class="footer">
-			<div id="upload"><img src="/static/img/upload.png"></div>
-            <div id="report"><img src="/static/img/edit.png"></div>
-            <div id="info"><img src="/static/img/info.png"></div>
-	    </div>
+			<div id="upload" onClick="toggle_display('imageUploadContainer');"><img src="/static/img/upload.png" /></div>
+            <div id="report" onClick="toggle_display('editReportContainer');"><img src="/static/img/edit.png" /></div>
+            <div id="info" onClick="toggle_display('infoContainer');"><img src="/static/img/info.png" /></div>
+    </div>
 
     <div class="modals">
             <div id="imageUploadContainer" class="displayNone">
@@ -90,7 +91,7 @@
             <div id="editReportContainer" class="displayNone">
                 <p>Give a brief description of your current situation.</p>
                 <input type="text" placeholder="A brief description"></input>
-                <button class="button-primary" value="Update" id="report" onclick="report_event();">Update</button>
+                <button class="button-primary" value="Update" onclick="report_event();">Update</button>
             </div>
             <div id="infoContainer" class="displayNone">
                 <img src="https://placehold.it/350x150">
@@ -108,6 +109,28 @@
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   	<script>
+        var LAST = None;
+        
+        function toggle_display( name ){
+            var e = document.getElementById(name);
+            clear_displays( e );
+            if(e.className.includes('displayBlock')){
+                e.classList.remove('displayBlock');
+            } else {
+                e.classList.add('displayBlock');
+            }
+        }
+        
+        function clear_displays( e ){
+            var items = document.getElementsByClassName('displayNone');
+            for(var i=0;i<items.length;i++){
+                if(items[i]!=e){
+                    items[i].className = "displayNone";
+                }
+            }
+        }
+        
+        
 		EVENTS={{ events|safe }};
 		IMAGES={{ images|safe }};
 

@@ -54,7 +54,17 @@
 	text-transform:capitalize;
     width: 100%;
     height: 5vh;
+    font-weight: 300;
+    font-size: 0.5em;
+    padding-left: 1em;
+    padding-top: 0.7em;
 }
+
+@media (min-width: 320px) {#warning_box {font-size: 1em; padding-top: 1.2em;}}
+@media (min-width: 550px) {#warning_box {font-size: 0.7em; padding-top:0.3em;}}
+@media (min-width: 750px) {#warning_box {font-size: 0.8em; padding-left: 8em; padding-top:0.3em;}}
+@media (min-width: 1000px) {#warning_box {font-size: 1em; padding-left: 13em; padding-top: 0em;}}
+@media (min-width: 1200px) {#warning_box {font-size: 1em; padding-left: 20em;}}
 
 /*Alerts*/
 .high {
@@ -93,7 +103,7 @@
 @media (min-width: 550px) {#imageUploadContainer {width: 70%; height: 40%; top: 45vh;}}
 @media (min-width: 750px) {#imageUploadContainer {width: 45%; height: 30%; top: 55vh;}}
 @media (min-width: 1000px) {#imageUploadContainer {width: 30%; height: 23%; top:65vh;}}
-@media (min-width: 1200px) {#imageUploadContainer {width: 30%; height: 23%; top: 65vh;}}
+@media (min-width: 1200px) {#imageUploadContainer {width: 30%; height: 23%; top: 54vh;}}
 
 #editReportContainer {background-color: #f7f7f7; position: absolute; height:50%; width: 50%;}
 #editReportContainer {text-align: center; color:#a0a0a0; padding-top: 2.5em; padding-bottom: 0.5em;}
@@ -162,16 +172,6 @@
 	.footer>div>span{
 	}
 }
-
-
-/* The Modal (background) */
-
-
-
-
-
-
-
 
 
 

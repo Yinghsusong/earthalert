@@ -155,28 +155,24 @@ function file_upload( file ){
 	xhr.send(fd);
 }
 
-function information(){
-	 var check = window.alert("SLIDE, or Suspected Landslide Identification Environment, is aresponsive web app designed by Team EarthAlert to help save lives utilizing data collected from NASA’s observation satellites and their NowCast system. As well, the community can contribute their own landslide data to a data base operated by team EarthAlert to improve the global understanding of how and where landslides strike.");
-}
-
 // -----------------------------------------------------------------------------
 // code runs on import
+/*
+        //Modal Updated Functions
+        $("#upload").on('click' , function(e){
+            e.preventDefault();
+            $("#imageUploadContainer").toggleClass("displayBlock");
+        });
 
-//Modal Updated Functions
-$("#upload").on('click' , function(e) {
-    e.preventDefault();
-    $("#imageUploadContainer").toggleClass("displayBlock");
-});
+        $("#info").on('click' , function(e){
+            e.preventDefault();
+            $("#infoContainer").toggleClass("displayBlock");
+        });
 
-$("#report").on('click' , function(e) {
-    e.preventDefault();
-    $("#editReportContainer").toggleClass("displayBlock");
-});
-
-$("#info").on('click' , function(e) {
-    e.preventDefault();
-    $("#infoContainer").toggleClass("displayBlock");
-});
-
+        $("#report").on('click' , function(e){
+            e.preventDefault();
+            $("#editReportContainer").toggleClass("displayBlock");
+        });
+*/
 
 update();
