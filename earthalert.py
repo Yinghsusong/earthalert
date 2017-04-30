@@ -110,26 +110,22 @@ def fetch():
 
 @app.route("/sms", methods=['GET'])
 def sms_reply():
-	try:
-		number = request.values.get('From','FROM_NOT_FOUND')
-		message_body = request.values.get('Body','BODY_NOT_FOUND')
+	number = request.values.get('From','FROM_NOT_FOUND')
+	message_body = request.values.get('Body','BODY_NOT_FOUND')
 
-		location = [ v.strip() for v in message_body.split(',') ]
-		lat, lon = location[0], location[1]
+	location = [ v.strip() for v in message_body.split(',') ]
+	lat, lon = location[0], location[1]
 
-		#risk = alert_level(lat,lon)
+	#risk = alert_level(lat,lon)
 
-		with open('SMS_DUMP.txt','w') as f:
-			f.write(str(location))
-			f.write(str(request.values))
+	with open('SMS_DUMP.txt','w') as f:
+		f.write(str(location))
+		f.write(str(request.values))
 
 		resp = twiml.Response()
 		resp.message('Hello {}, you said: {},{}'.format(number, lat, lon))
-		return str(resp)
-	except Exception as e:
-		resp = twiml.Response()
-		resp.message('Exception: {}'.format(e))
-		return str(resp)
+		f.write(str(resp))
+		return resp.to_xml()
 
 @app.route("/warning_level", methods=['GET'])
 def warning_level():
