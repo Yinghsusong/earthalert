@@ -16,6 +16,7 @@ function error( e ){
 
 function update( position ){
 	if(position){
+		try{
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
 		var center = new google.maps.LatLng( lat, lon)
@@ -48,6 +49,9 @@ function update( position ){
 		window.lon = lon;
 
 		warning_level(lat,lon);
+	} catch( err ){
+		console.log( err );
+	}
 	} else {
 		get_location();
 	}
