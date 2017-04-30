@@ -40,15 +40,19 @@ function warning_level(lat, lon){
 			switch(warning_level){
 				case 0:
 					box.classList.add('low');
+					box.innerHTML = 'Low risk in your area';
 					break;
 				case 1:
 					box.classList.add('med');
+					box.innerHTML = 'Medium risk in your area';
 					break;
 				case 2:
 					box.classList.add('high');
+					box.innerHTML = 'High risk in your area';
 					break;
 				default:
 					box.classList.add('unkn');
+					box.innerHTML = 'Unknown risk in your area';
 					break;
 			}
 		}
