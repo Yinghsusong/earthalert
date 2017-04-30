@@ -8,7 +8,7 @@ from flask import Flask, request, render_template, make_response
 import json
 import os
 
-from twilio import twiml
+from twilio.twiml import messaging_response
 
 # local imports
 from package import models
@@ -118,14 +118,8 @@ def sms_reply():
 
 	#risk = alert_level(lat,lon)
 
-	with open('SMS_DUMP.txt','w') as f:
-		f.write(str(location))
-		f.write(str(request.values))
-
-		resp = twiml.Response()
-		resp.message('Hello {}, you said: {},{}'.format(number, lat, lon))
-		f.write(str(resp))
-		return resp.to_xml()
+	response = messaging_response.Message('Hi')
+	return response.to_xml()
 
 @app.route("/warning_level", methods=['GET'])
 def warning_level():
