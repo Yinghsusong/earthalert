@@ -139,6 +139,10 @@ function file_upload( file ){
 	var lat = window.lat;
 	var lon = window.lon;
 
+	console.log(file);
+	console.log(lat);
+	console.log(lon);
+
 	if( file && lat && lon ){
 		var url = '/upload';
 		var xhr = new XMLHttpRequest();
