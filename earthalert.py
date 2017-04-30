@@ -106,21 +106,18 @@ def fetch():
 	else:
 		return get_geo_json()
 
-@app.route("/sms", methods=['GET', 'POST'])
+@app.route("/sms", methods=['POST'])
 def sms_reply():
-	resp = MessagingResponse()
-	messages = requests.values
-	messages = messages.split(',')
-	alert = utilities.alert_level(messages[0],messages[1])
-	if alert == '0':
-		response = 'You are in a low risk zone.'
-	if alert == '1':
-		response = 'You are in a moderate risk zone.'
-	if alert == '2':
-		response = 'You are in a high risk zone.'
-	print(messages['msg'])
-	resp = MessagingResponse()
-	resp.message(response)
+    number = request.form['From']
+    message_body = request.form['Body']
+
+	location = [ v.strip() for v in message_body.split(',') ]
+	lat, lon = location[0], location[1]
+
+	#risk = alert_level(lat,lon)
+
+    resp = twiml.Response()
+    resp.message('Hello {}, you said: {},{}'.format(number, lat, lon))
 	return str(resp)
 
 @app.route("/warning_level", methods=['GET'])
