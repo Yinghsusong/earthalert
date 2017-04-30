@@ -31,6 +31,10 @@ app.debug = True
 def index():
 	events = [ e.json() for e in session.query( models.Event ).all() ]
 	images = [ e.json() for e in session.query( models.Image ).all() if e.path ]
+
+	log = open('LOG.txt','a')
+	log.write(str(len(images)))
+
 	url = get_geo_url()
 	return render_template( 'index.html', geo_url=url, events=events, images=images )
 
@@ -131,11 +135,18 @@ def sms_reply():
 		else:
 			lat, lon = get_long_lat( country, state, city )
 
+		log.write(str(lat) +'\n')
+		log.write(str(lon) +'\n')
+
 		danger_level = alert_level( lat, lon )
 		level = alert_level_str( danger_level )
 
+		log.write(str(danger_level) + '\n')
+		log.write(str(level) + '\n')
+
 		response = messaging_response.MessagingResponse()
 		response.message('Your risk level is: {} ({})'.format(level,danger_level),to=number,from_='2563611265')
+		log.write(response.to_xml() + '\n')
 		return response.to_xml()
 	except Exception as e:
 		log.write(str(type(e)) + ': ' + str(e) + '\n')
