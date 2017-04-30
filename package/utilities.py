@@ -5,6 +5,15 @@ import json
 import matplotlib.path as matpath
 import numpy as np
 from package.socioecon import poverty_level
+from geocodio import GeocodioClient
+
+def get_long_lat( country, state, city ):
+	client = GeocodioClient('05047884974545850d50078551d55d49cd80905')
+	location = data = client.geocode('{}, {} {}'.format(city,state,country))['results'][0]['location']
+	lat = location['lat']
+	lon = location['lng']
+	return lat, lon
+
 
 def get_datetime_str( days_behind=0 ):
 	date = datetime.now() - timedelta(days=days_behind)
