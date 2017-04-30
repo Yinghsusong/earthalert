@@ -65,8 +65,6 @@ def upload():
 
 		image = models.Image( lat, lon, '/' + partial )
 
-		log.write('lat:{} lon:{} path:{}'.format(lat,lon,partial))
-
 		try:
 			session.add(image)
 			session.commit()
