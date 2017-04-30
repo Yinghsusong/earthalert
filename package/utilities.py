@@ -4,6 +4,7 @@ from pprint import pprint
 import json
 import matplotlib.path as matpath
 import numpy as np
+from package.socioecon import poverty_level
 
 def get_datetime_str( days_behind=0 ):
 	date = datetime.now() - timedelta(days=days_behind)
@@ -43,33 +44,12 @@ def get_geo_url( lat=0, lon=0 ):
 												color_url = data_dict['url']
 	return geo_url
 
-def get_polygons( lat, lon ):
-	dt = datetime.now().strftime('%Y-%m-%d')
-	url = 'https://pmmpublisher.pps.eosdis.nasa.gov/opensearch'
-	params = {
-		'q':'global_landslide_nowcast_30mn',
-		'lat':str(lat),
-		'lon':str(lon),
-		'limit':1,
-		'startTime':dt,
-		'endTime':dt
-	}
-	data = requests.get( url, params=params ).json()
-	geojson = None
-	for action in data['items'][0]['action']:
-		for item in action['using']:
-			if item['@id']=='geojson':
-				geojson = item['url']
-
-	if geojson:
-		geo_data = requests.get(geojson)
-		pprint( geo_data )
-
 def alert_level(lat, lon):
 	# load GeoJSON file containing sectors
 	geo_json=get_geo_json()
-	danger_level = 0
 	js = json.loads(geo_json)
+
+	rating = float( poverty_level( lat, lon ) )
 
 	# check each polygon to see if it contains the point
 	for feature in js['features']:
@@ -77,5 +57,6 @@ def alert_level(lat, lon):
 		path = matpath.Path(np.array(poly))
 		inside = path.contains_point((float(lat),float(lon)))
 		if inside:
-			return str(feature['properties']['nowcast'])
-	return str(0)
+			nowcast = float(feature['properties']['nowcast'])
+			return str(nowcast+rating)
+	return str(0+rating)

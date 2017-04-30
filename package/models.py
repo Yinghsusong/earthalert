@@ -60,6 +60,14 @@ class Image(Base):
 		self.latitude = latitude
 		self.longitude = longitude
 
+	def json( self ):
+		data = {
+			"path":self.path,
+			"latitude":self.latitude,
+			"longitude":self.longitude,
+		}
+		return json.loads(json.dumps(data))
+
 if __name__=='__main__':
 	db_engine = create_engine( 'sqlite:///earthalert.db' )
 	Base.metadata.create_all(db_engine)

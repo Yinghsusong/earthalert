@@ -106,9 +106,16 @@
 	cursor:pointer;
 }
 
+<<<<<<< HEAD
 
 
 
+=======
+.upload_image {
+	width:100px;
+	height:auto;
+}
+>>>>>>> d9aae8f88f299df9530c4c9efb1da82f088f08e1
 
 /*Footer */
 .footer {
@@ -146,6 +153,7 @@
 		display:none;
 	}
 }
+<<<<<<< HEAD
 
 /* The Modal (background) */
 .modal {
@@ -188,3 +196,5 @@
     text-decoration: none;
     cursor: pointer;
 }
+=======
+>>>>>>> d9aae8f88f299df9530c4c9efb1da82f088f08e1
