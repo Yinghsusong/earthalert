@@ -17,10 +17,26 @@ function update( position ){
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
 		var center = new google.maps.LatLng( lat, lon)
+		var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Your Position</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>Refer to box at upper right for your current threat level</b></p>'+
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+        	content: contentString
+        });
+        
 		var marker = new google.maps.Marker({
           position: {lat: lat, lng:lon},
-          label: 'Your Position',
+          title: 'Your Position',
           map: map
+        });
+        marker.addListener('click', function(){
+        	infowindow.open(map, marker);
         });
 		map.panTo( center );
 		map.setZoom(10);

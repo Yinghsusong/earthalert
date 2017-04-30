@@ -82,10 +82,9 @@ def sms_reply():
 		response = 'You are in a high risk zone.'
 	print(messages['msg'])
 	resp = MessagingResponse()
-    resp.message(response)
-    return str(resp)
+	resp.message(response)
+	return str(resp)
 
->>>>>>> 75895337902355437caa78c7b37d2cc9fe670323
 @app.route("/warning_level", methods=['GET'])
 def warning_level():
 	lat = request.values.get('lat')
