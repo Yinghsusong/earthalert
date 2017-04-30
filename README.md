@@ -1,5 +1,7 @@
-<h1> Team earthalert </h1>
-__huntsville space apps entry__
+<h1> Team Earth Alert </h1>
+<h3> Huntsville NASA Space Apps Challenge </h3>
+
+<h4> Project SLIDE: Suspected Landslide IDentification Environment </h4>
 
 This is the official repository for team Earth Alert at the Huntsville Space Apps Challenge 2017. We are competing in the Warning! Danger Ahead! category
 on the When Landslides Strike challenge. Our goal is to save lives through the power of community contributions. Our approach utilizes the existing NASA-create
