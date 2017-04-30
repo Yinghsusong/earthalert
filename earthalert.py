@@ -137,6 +137,9 @@ def sms_reply():
 		danger_level = alert_level( lat, lon )
 		level = alert_level_str( danger_level )
 
+		log.write(danger_level + '\n')
+		log.write(level + '\n')
+
 		response = messaging_response.MessagingResponse()
 		response.message('Your risk level is: {} ({})'.format(level,danger_level),to=number,from_='2563611265')
 		return response.to_xml()
