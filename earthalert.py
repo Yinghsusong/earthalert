@@ -31,6 +31,10 @@ app.debug = True
 def index():
 	events = [ e.json() for e in session.query( models.Event ).all() ]
 	images = [ e.json() for e in session.query( models.Image ).all() if e.path ]
+
+	log = open('LOG.txt','a')
+	log.write(str(len(images)))
+
 	url = get_geo_url()
 	return render_template( 'index.html', geo_url=url, events=events, images=images )
 
