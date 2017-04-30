@@ -3,6 +3,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from twilio.rest import Client
+from twilio.twiml.messaging_response import MessagingResponse
 from flask import Flask, request, render_template, make_response
 import json
 
@@ -25,17 +26,11 @@ def index():
 	events = session.query( models.Event ).all()
 	return render_template( 'index.html', events=events )
 
-@app.route("/report", methods=['POST'])
+# this is the index page. Going to http://localhost:5000/ when the
+# project is running will bring you here
+
+@app.route("/report", methods=[ 'GET', 'POST'])
 def report():
-	lat = request.values.get('lat')
-	lon = request.values.get('lon')
-	event = Event( lat, lon )
-	session.add(  )
-
-
-
-@app.route("/notify_me", methods=[ 'GET', 'POST'])
-def notify_me():
 	number =''
 	if request.method == "POST":
 		number = request.values.get('number')
@@ -47,14 +42,7 @@ def notify_me():
 			try:
 				session.add( person )
 				session.commit()
-				account_sid = 'ACb9b3ae8e3b69b1fba8a0f14b9faf2042'
-				auth_token = '885b48598f6934e4f98df504efe239a4'
-				"""client = Client(account_sid,auth_token)
-				message = client.messages.create(
-					to = '+12566985523',
-					from_ = '+12563611028',
-					body = 'This is a test message for the website')
-				print(message.sid)"""
+
 			except:
 				session.rollback()
 				try:
@@ -76,12 +64,19 @@ def fetch():
 	else:
 		return get_geo_json()
 
-@app.route("/warning_level", methods=['GET'])
+@app.route("/sms", methods=['GET', 'POST'])
+def sms_reply():
+	messages = requests.values
+	print(messages['msg'])
+    resp = MessagingResponse()
+
+    resp.message("test msg")
+    return str(resp)
+
+@app.route("/warning_level", methods=['POST'])
 def warning_level():
-	lat = request.values.get('lat')
-	lon = request.values.get('lon')
-	danger_level = alert_level(lat, lon)
-	return danger_level
+	alert_level = request.values.get('alert_level')
+	print(alert_level)
 
 if __name__ == "__main__":
 	app.debug = True
