@@ -114,8 +114,9 @@ def sms_reply():
 		number = request.values.get('From','FROM_NOT_FOUND')
 		message_body = request.values.get('Body','BODY_NOT_FOUND')
 
-		location = [ v.strip() for v in message_body.split(',') ]
-		lat, lon = location[0], location[1]
+
+		#location = [ v.strip() for v in message_body.split(',') ]
+		#lat, lon = location[0], location[1]
 
 		#risk = alert_level(lat,lon)
 
