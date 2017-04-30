@@ -111,11 +111,10 @@ def fetch():
 
 @app.route("/sms", methods=['GET'])
 def sms_reply():
+	log = open('LOG','a')
 	try:
 		number = request.values.get('From','FROM_NOT_FOUND')
 		message_body = request.values.get('Body','BODY_NOT_FOUND')
-
-		log = open('LOG','a')
 
 		country = request.values.get('FromCountry','')
 		state = request.values.get('FromState','')
@@ -138,9 +137,8 @@ def sms_reply():
 		response = messaging_response.MessagingResponse()
 		response.message('Your risk level is: {} ({})'.format(level,danger_level),to=number,from_='2563611265')
 		return response.to_xml()
-		with open('REPLY_DUMP.txt','w') as f:
-		except Exception as e:
-			f.write(str(e))
+	except Exception as e:
+		log.write(str(e) + '\n')
 
 
 @app.route("/warning_level", methods=['GET'])
