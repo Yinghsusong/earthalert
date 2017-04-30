@@ -1,40 +1,29 @@
 
 function get_location(){
 	if( navigator.geolocation ){
-		navigator.geolocation.getCurrentPosition( function( position ){
-			window.lat = position.coords.latitude;
-			window.lon = position.coords.longitude;
-			console.log(window.lat);
-			console.log(window.lon);
-		}, decline_pos, {timeout:10000});
+		navigator.geolocation.getCurrentPosition( update, error );
 	} else {
 		alert( 'You won\'t be able to submit reports.' );
 	}
 }
 
-function decline_pos( error ){
-	console.log( error );
+function error( e ){
+	console.log( e );
 	alert( 'There was a problem getting your location- you won\'t be able to submit reports.' );
 }
 
 function update( position ){
 	if(position){
-		window.lat = position.coords.latitude;
-		window.lon = position.coords.longitude;
-		var center = new google.maps.LatLng(window.lat, window.lon)
+		var lat = position.coords.latitude;
+		var lon = position.coords.longitude;
+		var center = new google.maps.LatLng( lat, lon)
 		var marker = new google.maps.Marker({
-          position: {lat: window.lat, lng:window.lon},
+          position: {lat: lat, lng:lon},
           map: map
         });
 		map.panTo( center );
 		map.setZoom(10);
 		warning_level(lat,lon);
-
-		window.latitude = lat;
-		window.longitude = lon;
-
-		console.log(window.latitude);
-		console.log(window.longitude);
 	} else {
 		get_location();
 	}
@@ -46,9 +35,22 @@ function warning_level(lat, lon){
 
 	request.onreadystatechange = function() {
 	if (request.readyState == 4 && request.status == 200){
-			var level = request.responseText;
-			window.warning_level = level;
-			console.log(window.warning_level);
+			var warning_level = parseInt(request.responseText);
+			var box = document.getElementById('warning_box');
+			switch(warning_level){
+				case 0:
+					box.classList.add('low');
+					break;
+				case 1:
+					box.classList.add('med');
+					break;
+				case 2:
+					box.classList.add('high');
+					break;
+				default:
+					box.classList.add('unkn');
+					break;
+			}
 		}
 	}
 	request.open("GET", url, true); // true for asynchronous
