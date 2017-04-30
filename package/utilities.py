@@ -7,7 +7,11 @@ from shapely.geometry import shape, Point
 def get_datetime_str():
 	return datetime.now().strftime('%Y-%m-%d')
 
-def get_geo_json( lat=0, lon=0):
+def get_geo_json( lat=0, lon=0 ):
+	url = get_geo_url( lat, lon )
+	return requests.get(url).text
+
+def get_geo_url( lat=0, lon=0 ):
 	base_url = 'https://pmmpublisher.pps.eosdis.nasa.gov/opensearch?q=global_landslide_nowcast_30mn'
 	lat_value = 'lat=' + str(lat)
 	lon_value = 'lon=' + str(lon)
@@ -35,11 +39,7 @@ def get_geo_json( lat=0, lon=0):
 												legend_url = data_dict['url']
 											if key == '@id' and value == 'style':
 												color_url = data_dict['url']
-
-	geo_json = requests.get(geo_url).text
-	#legend = requests.get(legend_url).json()
-	color_table = requests.get(color_url).text
-	return geo_json
+	return geo_url
 
 def get_polygons( lat, lon ):
 	dt = datetime.now().strftime('%Y-%m-%d')

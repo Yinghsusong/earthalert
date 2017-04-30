@@ -23,7 +23,8 @@ app = Flask(__name__)
 @app.route("/")
 def index():
 	events = session.query( models.Event ).all()
-	return render_template( 'index.html', events=events )
+	geo_url = get_geo_url()
+	return render_template( 'index.html', geo_url=geo_url )
 
 @app.route("/report", methods=['POST'])
 def report():
@@ -31,8 +32,6 @@ def report():
 	lon = request.values.get('lon')
 	event = Event( lat, lon )
 	session.add(  )
-
-
 
 @app.route("/notify_me", methods=[ 'GET', 'POST'])
 def notify_me():
