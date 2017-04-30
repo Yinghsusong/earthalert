@@ -84,6 +84,32 @@ function warning_level(lat, lon){
 	request.send(null);
 }
 
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 update();
 
 function report_event(){
@@ -103,6 +129,29 @@ function report_event(){
 }
 
 function get_file(){
-	var fileobj = document.getElementById('file-input');
+	var fileobj = document.getElementById('file_input');
+	fileobj.addEventListener('change',function(){
+		for(var i=0; i<this.files.length;i++){
+			var file = this.files[i];
+			file_upload( file );
+		}
+	})
 	fileobj.click();
+}
+
+function file_upload( file ){
+	var lat = window.lat;
+	var lon = window.lon;
+
+	var url = '/upload';
+	var xhr = new XMLHttpRequest();
+	var fd = new FormData();
+	xhr.open("POST", url, true);
+
+	fd.append("file", file);
+	fd.append("lat", lat);
+	fd.append("lon", lon);
+
+
+	xhr.send(fd);
 }

@@ -6,6 +6,7 @@ from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 from flask import Flask, request, render_template, make_response
 import json
+import os
 
 # local imports
 from package import models
@@ -15,6 +16,8 @@ from package.utilities import *
 db_engine = create_engine( 'sqlite:///earthalert.db' )
 session_generator = sessionmaker(bind=db_engine)
 session = session_generator()
+
+LOCATION = os.path.dirname(os.path.abspath(__file__))
 
 # init the app
 app = Flask(__name__)
@@ -41,6 +44,26 @@ def report():
 		session.rollback()
 		print(e)
 		return 'BAD'
+
+@app.route("/upload", methods=['POST'])
+def upload():
+	try:
+		lon = request.values.get('lon')
+		lat = request.values.get('lat')
+		f = request.files['file']
+		path = os.path.join(LOCATION,'data/images/{}'.format(f.filename))
+		f.save(path)
+
+		image = models.Image( lat, lon, path )
+		session.add(image)
+		session.commit()
+
+		return 'GOOD'
+
+	except Exception as e:
+		print(e)
+		return 'BAD'
+
 
 @app.route("/notify_me", methods=[ 'GET', 'POST'])
 def notify_me():
@@ -79,6 +102,7 @@ def fetch():
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
+	resp = MessagingResponse()
 	messages = requests.values
 	messages = messages.split(',')
 	alert = utilities.alert_level(messages[0],messages[1])
