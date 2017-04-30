@@ -136,7 +136,6 @@ def sms_reply():
 
 		response = messaging_response.MessagingResponse()
 		response.message('Your risk level is: {} ({})'.format(level,danger_level),to=number,from_='2563611265')
-		log.write( response.to_xml() )
 		return response.to_xml()
 	except Exception as e:
 		log.write(str(type(e)) + ': ' + str(e) + '\n')
