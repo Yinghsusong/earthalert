@@ -53,7 +53,7 @@
     </div>
 
 
-   
+
 
         <div id="mapContainer">
             <div id="map"></div>
@@ -76,7 +76,7 @@
         </div>
 
 	<input id="file_input" type="file" name="name" style="display:none;" />
-    
+
     <div class="footer">
 			<div id="upload" onClick="toggle_display('imageUploadContainer');"><img src="/static/img/upload.png" /></div>
             <div id="report" onClick="toggle_display('editReportContainer');"><img src="/static/img/edit.png" /></div>
@@ -109,8 +109,7 @@
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   	<script>
-        var LAST = None;
-        
+
         function toggle_display( name ){
             var e = document.getElementById(name);
             clear_displays( e );
@@ -120,7 +119,7 @@
                 e.classList.add('displayBlock');
             }
         }
-        
+
         function clear_displays( e ){
             var items = document.getElementsByClassName('displayNone');
             for(var i=0;i<items.length;i++){
@@ -129,8 +128,8 @@
                 }
             }
         }
-        
-        
+
+
 		EVENTS={{ events|safe }};
 		IMAGES={{ images|safe }};
 
