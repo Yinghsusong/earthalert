@@ -72,11 +72,11 @@ def alert_level(lat, lon):
 def alert_level_str( level ):
 	if level<0:
 		return 'Uknown'
-	else if 0 <= level < 1:
+	elif 0 <= level < 1:
 		return 'Low'
-	else if 1 <= level < 2:
+	elif 1 <= level < 2:
 		return 'Medium'
-	else if 2 <= level < 3:
+	elif 2 <= level < 3:
 		return 'High'
 	else:
 		return 'Extreme'
