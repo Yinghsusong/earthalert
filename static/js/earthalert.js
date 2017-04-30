@@ -17,9 +17,28 @@ function update( position ){
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
 		var center = new google.maps.LatLng( lat, lon)
+		var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Your Position</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>Refer to box at upper right for your current threat level</b></p>'
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+        	content: contentString
+        });
+        var image = '/static/img/home.png'
 		var marker = new google.maps.Marker({
           position: {lat: lat, lng:lon},
+          title: 'Your Position',
+          icon: 'http://maps.google.com/mapfiles/kml/shapes/homegardenbusiness.png', 
+          size: 8,
           map: map
+        });
+        marker.addListener('click', function(){
+        	infowindow.open(map, marker);
         });
 		map.panTo( center );
 		map.setZoom(10);
