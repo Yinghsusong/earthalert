@@ -181,6 +181,7 @@ We are a team of five college students from the University of Huntsville in Alab
 			var images={{ events|safe }};
 			for(var i =0; i < images.length;i++){
 				var image = images[i];
+				console.log(image);
 				contentString.push( '<div id="content">'+
 	            							'<a href="' + image.path + '"><img src="' + image.path + '" /></a>' +
 	            						'</div>'+
