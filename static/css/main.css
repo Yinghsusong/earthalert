@@ -82,6 +82,10 @@
 	letter-spacing: 0.5em;
 }
 
+#report {
+	cursor:pointer;
+}
+
 .footer img {
 	max-height:10vh;
 }

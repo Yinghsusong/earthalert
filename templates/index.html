@@ -56,7 +56,7 @@
 					mapTypeId: 'terrain',
                     zoom: 3,
 					minZoom: 2,
-					maxZoom: 10,
+					maxZoom: 12,
 					center: {lat: 33, lng: 3}
 				});
 				map.data.setStyle({ fillColor:'red', strokeWeight: 0, fillOpacity: 0.8});
@@ -68,10 +68,14 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqZYLz6Y4lJGuBatmPuHJxPt-Y75kNag&callback=initMap">
 		</script>
 
+		<form id="fileupload"action="/upload" style="display:none;">
+			<input id="file-input" type="file" name="name" style="display:none;" />
+		</form>
+
 	    <div class="footer">
-			<div><img src="/static/img/upload.png"><span>Upload</span></div>
-			<div><img src="/static/img/edit.png"><span>Report</span></div>
-      <button id = "myBtn">Open Modal</button>
+  			<div onclick="get_file();" ><img src="/static/img/upload.png"><span>Upload</span></div>
+  			<div id="report" onclick="report_event();"><img src="/static/img/edit.png"><span>Report</span></div>
+        <button id = "myBtn">Open Modal</button>
 	    </div>
     </div><!--Main Website Content -->
 
@@ -81,7 +85,33 @@
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="static/js/earthalert.js"></script>
-  <script src="static/js/d3-geo.min.js"></script>
+  	<script>
+		function init_events(){
+			var EVENTS={{ events|safe }};
+			for(var i =0; i < EVENTS.length;i++){
+				var data = EVENTS[i];
+				var contentString = '<div id="content">'+
+	            						'<h3 id="event_title">Landslide Report:</h3>'+
+	            						'<div id="event_description">'+
+	            							'<p>' + data.description + '</p>' +
+											'<b>(' + data.datetime + ')</b>'+
+	            						'</div>'+
+	            					'</div>';
+
+		        var infowindow = new google.maps.InfoWindow({
+		        	content: contentString
+		        });
+				var marker = new google.maps.Marker({
+					position: {lat: parseInt(data.latitude), lng:parseInt(data.longitude)},
+					title: 'Landslide Report',
+					map: map
+				});
+				marker.addListener('click', function(){
+					infowindow.open(map, marker);
+				});
+			}
+		}
+	</script>
+	<script src="static/js/earthalert.js"></script>
 </body>
 </html>
