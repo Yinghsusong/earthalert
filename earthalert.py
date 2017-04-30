@@ -32,9 +32,6 @@ def index():
 	events = [ e.json() for e in session.query( models.Event ).all() ]
 	images = [ e.json() for e in session.query( models.Image ).all() if e.path ]
 
-	log = open('LOG.txt','a')
-	log.write(str(len(images)))
-
 	url = get_geo_url()
 	return render_template( 'index.html', geo_url=url, events=events, images=images )
 
@@ -57,12 +54,12 @@ def report():
 def upload():
 	log = open('LOG','a')
 	try:
+		location = os.path.dirname(os.path.abspath(__file__))
 		lon = request.values.get('lon')
 		lat = request.values.get('lat')
 		f = request.files['file']
 
 		partial = 'static/upload/{}'.format(f.filename)
-
 		path = os.path.join(LOCATION,partial)
 		f.save(path)
 
