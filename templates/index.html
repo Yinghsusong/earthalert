@@ -58,7 +58,7 @@
 					mapTypeId: 'terrain',
                     zoom: 3,
 					minZoom: 2,
-					maxZoom: 12,
+					maxZoom: 14,
 					center: {lat: 33, lng: 3}
 				});
 				map.data.setStyle({ fillColor:'red', strokeWeight: 0, fillOpacity: 0.8});
@@ -87,23 +87,25 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   	<script>
 		function init_events(){
+            var contentString = [];
 			var EVENTS={{ events|safe }};
 			for(var i =0; i < EVENTS.length;i++){
 				var data = EVENTS[i];
-				var contentString = '<div id="content">'+
+				contentString.push( '<div id="content">'+
 	            						'<h3 id="event_title">Landslide Report:</h3>'+
 	            						'<div id="event_description">'+
 	            							'<p>' + data.description + '</p>' +
 											'<b>(' + data.datetime + ')</b>'+
 	            						'</div>'+
-	            					'</div>';
+	            					'</div>');
 
 		        var infowindow = new google.maps.InfoWindow({
-		        	content: contentString
+		        	content: contentString[i]
 		        });
 				var marker = new google.maps.Marker({
-					position: {lat: parseInt(data.latitude), lng:parseInt(data.longitude)},
-					title: 'Landslide Report',
+					position: {lat: parseFloat(data.latitude + 0.001*Math.random()), lng:parseFloat(data.longitude - 0.001*Math.random())},
+					title: 'Community Report',
+                    icon: '/static/img/caution.png',
 					map: map
 				});
 				marker.addListener('click', function(){
