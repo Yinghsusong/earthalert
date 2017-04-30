@@ -135,14 +135,14 @@ def sms_reply():
 		else:
 			lat, lon = get_long_lat( country, state, city )
 
-		log.write(lat +'\n')
-		log.write(lon +'\n')
+		log.write(str(lat) +'\n')
+		log.write(str(lon) +'\n')
 
 		danger_level = alert_level( lat, lon )
 		level = alert_level_str( danger_level )
 
-		log.write(danger_level + '\n')
-		log.write(level + '\n')
+		log.write(str(danger_level) + '\n')
+		log.write(str(level) + '\n')
 
 		response = messaging_response.MessagingResponse()
 		response.message('Your risk level is: {} ({})'.format(level,danger_level),to=number,from_='2563611265')
