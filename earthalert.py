@@ -25,8 +25,8 @@ LOCATION = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
 
 # this is the index page. Going to http://localhost:5000/ when the
-# project is running will bring you here
 @app.route("/")
+# project is running will bring you here
 def index():
 	events = [ e.json() for e in session.query( models.Event ).all() ]
 	images = [ e.json() for e in session.query( models.Image ).all() ]
@@ -110,16 +110,23 @@ def fetch():
 
 @app.route("/sms", methods=['GET'])
 def sms_reply():
-	number = request.values.get('From','FROM_NOT_FOUND')
-	message_body = request.values.get('Body','BODY_NOT_FOUND')
+	try:
+		number = request.values.get('From','FROM_NOT_FOUND')
+		message_body = request.values.get('Body','BODY_NOT_FOUND')
 
-	location = [ v.strip() for v in message_body.split(',') ]
-	lat, lon = location[0], location[1]
+		with open('REPLY_DUMP.txt','w') as f:
+			f.write(request.values)
+ 
+		#lat, lon = get_long_lat( country, state, city )
+		#risk = alert_level(lat,lon)
 
-	#risk = alert_level(lat,lon)
+		response = messaging_response.MessagingResponse()
+		response.message('TEST',to=number,from_='2563611265')
+		return response.to_xml()
+	except Exception as e:
+		with open('REPLY_DUMP.txt','w') as f:
+			f.write(str(e))
 
-	response = messaging_response.Message('Hi')
-	return response.to_xml()
 
 @app.route("/warning_level", methods=['GET'])
 def warning_level():
