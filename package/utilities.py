@@ -59,3 +59,5 @@ def alert_level(lat, lon):
 	        # print('Found containing polygon:', feature)
 	        danger_level = feature['properties']['nowcast']
 	return str(danger_level)
+
+get_geo_url()
