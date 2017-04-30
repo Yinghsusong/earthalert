@@ -30,7 +30,7 @@ app.debug = True
 # project is running will bring you here
 def index():
 	events = [ e.json() for e in session.query( models.Event ).all() ]
-	images = [ e.json() for e in session.query( models.Image ).all() if e.path ]
+	images = [ e.json() for e in session.query( models.Image ).all() ]
 
 	url = get_geo_url()
 	return render_template( 'index.html', geo_url=url, events=events, images=images )
@@ -64,6 +64,8 @@ def upload():
 		f.save(path)
 
 		image = models.Image( lat, lon, '/' + partial )
+
+		log.write('lat:{} lon:{} path:{}'.format(lat,lon,partial))
 
 		try:
 			session.add(image)
