@@ -8,7 +8,7 @@ from flask import Flask, request, render_template, make_response
 import json
 import os
 
-import twiml
+from twilio import twiml
 
 # local imports
 from package import models
