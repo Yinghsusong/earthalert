@@ -131,6 +131,9 @@ def sms_reply():
 		else:
 			lat, lon = get_long_lat( country, state, city )
 
+		log.write(lat +'\n')
+		log.write(lon +'\n')
+
 		danger_level = alert_level( lat, lon )
 		level = alert_level_str( danger_level )
 
