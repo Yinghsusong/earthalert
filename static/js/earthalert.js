@@ -161,7 +161,17 @@ function information(){
 //Modal Updated Functions
 $("#upload").on('click' , function(e) {
     e.preventDefault();
-    $(".modal").fadeIn("slow");
+    $("#imageUploadContainer").toggleClass("displayBlock");
+});
+
+$("#report").on('click' , function(e) {
+    e.preventDefault();
+    $("#editReportContainer").toggleClass("displayBlock");
+});
+
+$("#info").on('click' , function(e) {
+    e.preventDefault();
+    $("#infoContainer").toggleClass("displayBlock");
 });
 
 

@@ -84,9 +84,8 @@
 
 /*Bottom Modals*/
 
-.modals {
-    width: 100%;
-}
+.modals {width: 100%;}
+.modal p {padding-bottom: 1em;}
 
 #imageUploadContainer {background-color: #f7f7f7; position: absolute; height:50%; width: 50%;}
 #imageUploadContainer {text-align: center; color:#a0a0a0; padding-top: 2.5em;}
@@ -95,6 +94,23 @@
 @media (min-width: 750px) {#imageUploadContainer {width: 45%; height: 30%; top: 55vh;}}
 @media (min-width: 1000px) {#imageUploadContainer {width: 30%; height: 23%; top:65vh;}}
 @media (min-width: 1200px) {#imageUploadContainer {width: 30%; height: 23%; top: 65vh;}}
+
+#editReportContainer {background-color: #f7f7f7; position: absolute; height:50%; width: 50%;}
+#editReportContainer {text-align: center; color:#a0a0a0; padding-top: 2.5em; padding-bottom: 0.5em;}
+@media (min-width: 320px) {#editReportContainer {width: 80%; height: 30%; margin-left:10%; top:45vh;}}
+@media (min-width: 550px) {#editReportContainer {width: 70%; height: 22%; top: 55vh;}}
+@media (min-width: 750px) {#editReportContainer {width: 45%; height: 20%; top: 59vh; padding-left: 0.5em; padding-right: 0.5em; margin-left:27%;}}
+@media (min-width: 1000px) {#editReportContainer {width: 30%; height: 30%; top:46vh; margin-left:34%;}}
+@media (min-width: 1200px) {#editReportContainer {width: 30%; height: 23%; top: 54vh;}}
+
+#infoContainer {background-color: #f7f7f7; position: absolute; height:50%; width: 50%; overflow-y: scroll;}
+#infoContainer {text-align: center; color:#a0a0a0; padding-top: 2.5em;}
+@media (min-width: 320px) {#infoContainer {width: 80%; height: 60%; margin-left:10%; top:20vh;}}
+@media (min-width: 550px) {#infoContainer {width: 70%; height: 60%; top: 17vh; margin-left:20%;}}
+@media (min-width: 750px) {#infoContainer {width: 45%; height: 60%; top: 20vh; margin-left: 45%;}}
+@media (min-width: 1000px) {#infoContainer {width: 30%; height: 62%; top:17vh; margin-left: 59%;}}
+@media (min-width: 1200px) {#infoContainer {width: 30%; height: 62%; top: 17vh;margin-left: 59%;}}
+
 
 
 
@@ -144,52 +160,18 @@
 
 @media (max-width: 320px) {
 	.footer>div>span{
-		display:none;
 	}
 }
 
 
 /* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 10; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
 
-.modal p {
-    padding-bottom: 1em;
-}
 
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
 
-/* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
+
+
+
 
 
 
