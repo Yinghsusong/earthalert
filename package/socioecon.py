@@ -13,7 +13,7 @@ def poverty_level( lat, lon ):
 	response = requests.get(url,params=params)
 	data = response.json()
 	country = data['countryName']
-	level = COUNTRIES[country]
+	level = COUNTRIES.get(country,0)
 	return str(level)
 
 
