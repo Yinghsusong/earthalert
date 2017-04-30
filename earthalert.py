@@ -115,21 +115,18 @@ def sms_reply():
 		number = request.values.get('From','FROM_NOT_FOUND')
 		message_body = request.values.get('Body','BODY_NOT_FOUND')
 
-		with open('DUMPT.txt','w') as f:
-			f.write(request.values.get('FromCountry'))
-			f.write('\n')
-			f.write(request.values.get('FromState'))
-			f.write('\n')
-			f.write(request.values.get('FromCity'))
+		country = request.values.get('FromCountry')
+		state = request.values.get('FromState')
+		city = request.values.get('FromCity')
 
-		# lat, lon = get_long_lat( country, state, city )
+		lat, lon = get_long_lat( country, state, city )
 		#location = [ v.strip() for v in message_body.split(',') ]
 		#lat, lon = location[0], location[1]
 
 		#risk = alert_level(lat,lon)
 
 		response = messaging_response.MessagingResponse()
-		response.message('TEST',to=number,from_='2563611265')
+		response.message('lat: {} lon: {}'.format(lat,lon),to=number,from_='2563611265')
 		return response.to_xml()
 	except Exception as e:
 		with open('REPLY_DUMP.txt','w') as f:
