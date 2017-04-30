@@ -29,7 +29,7 @@ app = Flask(__name__)
 # project is running will bring you here
 def index():
 	events = [ e.json() for e in session.query( models.Event ).all() ]
-	images = [ e.json() for e in session.query( models.Image ).all() ]
+	images = [ e.json() for e in session.query( models.Image ).all() if e.path ]
 	url = get_geo_url()
 	return render_template( 'index.html', geo_url=url, events=events, images=images )
 
