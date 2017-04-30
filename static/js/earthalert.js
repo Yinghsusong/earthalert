@@ -19,6 +19,7 @@ function update( position ){
 		var center = new google.maps.LatLng( lat, lon)
 		var marker = new google.maps.Marker({
           position: {lat: lat, lng:lon},
+          label: 'Your Position',
           map: map
         });
 		map.panTo( center );

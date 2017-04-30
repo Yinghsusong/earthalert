@@ -73,12 +73,12 @@ def fetch():
 def sms_reply():
 	messages = requests.values
 	print(messages['msg'])
-    resp = MessagingResponse()
+	resp = MessagingResponse()
+	resp.message("test msg")
+	return str(resp)
 
-    resp.message("test msg")
-    return str(resp)
 
-@app.route("/warning_level", methods=['POST'])
+@app.route("/warning_level", methods=['GET'])
 def warning_level():
 	alert_level = request.values.get('alert_level')
 	print(alert_level)
