@@ -149,6 +149,8 @@ We are a team of five college students from the University of Huntsville in Alab
 		EVENTS={{ events|safe }};
 		IMAGES={{ images|safe }};
 
+		console.log(IMAGES);
+
 		function init_events( events ){
             var contentString = [];
 			for(var i =0; i < events.length;i++){
@@ -177,7 +179,6 @@ We are a team of five college students from the University of Huntsville in Alab
 		}
 
 		function init_images( images ){
-			console.log( images );
             var contentString = [];
 			for(var i =0; i < images.length;i++){
 				var image = images[i];
