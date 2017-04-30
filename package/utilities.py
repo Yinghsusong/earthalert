@@ -70,7 +70,7 @@ def alert_level(lat, lon):
 	return str(0+rating)
 
 def alert_level_str( level ):
-	level = int(level)
+	level = float(level)
 	if level<0:
 		return 'Uknown'
 	elif 0 <= level < 1:
