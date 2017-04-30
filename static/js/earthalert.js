@@ -19,7 +19,13 @@ function decline_pos( error ){
 
 function update( position ){
 	if(position){
-		var center = new google.maps.LatLng(lat, lon)
+		window.lat = position.coords.latitude;
+		window.lon = position.coords.longitude;
+		var center = new google.maps.LatLng(window.lat, window.lon)
+		var marker = new google.maps.Marker({
+          position: {lat: window.lat, lng:window.lon},
+          map: map
+        });
 		map.panTo( center );
 		map.setZoom(10);
 		warning_level(lat,lon);
