@@ -60,6 +60,11 @@
 	border: 1px solid black;
 }
 
+.upload_image {
+	width:100px;
+	height:auto;
+}
+
 /*Footer */
 .footer {
 	display: flex;

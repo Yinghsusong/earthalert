@@ -27,8 +27,9 @@ app = Flask(__name__)
 @app.route("/")
 def index():
 	events = [ e.json() for e in session.query( models.Event ).all() ]
+	images = [ e.json() for e in session.query( models.Image ).all() ]
 	url = get_geo_url()
-	return render_template( 'index.html', geo_url=url, events=events )
+	return render_template( 'index.html', geo_url=url, events=events, images=images )
 
 @app.route("/report", methods=['GET'])
 def report():
@@ -51,18 +52,23 @@ def upload():
 		lon = request.values.get('lon')
 		lat = request.values.get('lat')
 		f = request.files['file']
-		path = os.path.join(LOCATION,'data/images/{}'.format(f.filename))
+
+		partial = 'static/upload/{}'.format(f.filename)
+
+		path = os.path.join(LOCATION,partial)
 		f.save(path)
 
-		image = models.Image( lat, lon, path )
-		session.add(image)
-		session.commit()
+		image = models.Image( lat, lon, '/' + partial )
 
-		return 'GOOD'
-
+		try:
+			session.add(image)
+			session.commit()
+		except:
+			session.rollback()
+			raise
 	except Exception as e:
 		print(e)
-		return 'BAD'
+	return ''
 
 
 @app.route("/notify_me", methods=[ 'GET', 'POST'])

@@ -1,3 +1,5 @@
+// -----------------------------------------------------------------------------
+// FUNCTIONS
 
 function get_location(){
 	if( navigator.geolocation ){
@@ -29,7 +31,8 @@ function update( position ){
         var infowindow = new google.maps.InfoWindow({
         	content: contentString
         });
-        var image = '/static/img/home.png'
+        var image = '/static/img/home.png';
+
 		var marker = new google.maps.Marker({
           position: {lat: lat, lng:lon},
           title: 'Your Position',
@@ -40,7 +43,7 @@ function update( position ){
         });
 		map.panTo( center );
 		map.setZoom(10);
-		init_events();
+		//init_events();
 
 		window.lat = lat;
 		window.lon = lon;
@@ -51,10 +54,20 @@ function update( position ){
 	}
 }
 
-function calculate_warning_level( base ){
-	//for(var i=0;i<EVENTS.length;i++){
-	//	console.log( EVENTS[i] );
-	//}
+function calculate_warning_level( base, lat, lon ){
+	var base = parseFloat( base );
+	var lat = parseFloat( lat );
+	var lon = parseFloat( lon );
+	for(var i=0;i<EVENTS.length;i++){
+		item = EVENTS[i];
+		diff = {
+			'x': Math.abs( parseFloat(item.latitude) ) - Math.abs( lat ),
+			'y': Math.abs( parseFloat(item.longitude) ) - Math.abs( lon ),
+		}
+		if(diff.x<0.5&&diff.y<0.5){
+			base += 0.1;
+		}
+	}
 	return base;
 }
 
@@ -66,58 +79,32 @@ function warning_level(lat, lon){
 
 	request.onreadystatechange = function() {
 	if (request.readyState == 4 && request.status == 200){
-			var warning_level = calculate_warning_level( parseInt(request.responseText) );
-			switch(warning_level){
-				case 0:
-					box.classList.add('low');
-					box.innerHTML = 'Low risk in your area';
-					break;
-				case 1:
-					box.classList.add('med');
-					box.innerHTML = 'Medium risk in your area';
-					break;
-				case 2:
-					box.classList.add('high');
-					box.innerHTML = 'High risk in your area';
-					break;
-				default:
-					box.classList.add('unkn');
-					box.innerHTML = 'Unknown risk in your area';
-					break;
+			var wl = calculate_warning_level( request.responseText, lat, lon );
+			if( wl >= 0 && wl < 1){
+				box.classList.add('low');
+				box.innerHTML = 'Low risk in your area';
+			}
+			else if( wl >= 1 && wl < 2){
+				box.classList.add('med');
+				box.innerHTML = 'Medium risk in your area';
+			}
+			else if( wl >= 2 && wl < 3 ){
+				box.classList.add('high');
+				box.innerHTML = 'High risk in your area';
+			}
+			else if( wl >= 3 ){
+				box.classList.add('high');
+				box.innerHTML = 'Extreme risk in your area';
+			}
+			else{
+				box.classList.add('unkn');
+				box.innerHTML = 'Unknown risk in your area';
 			}
 		}
 	}
 	request.open("GET", url, true); // true for asynchronous
 	request.send(null);
 }
-
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-
-update();
 
 function report_event(){
 	var desc = window.prompt("You are reporting a landslide event in your area. Please provide a short description.","");
@@ -146,6 +133,7 @@ function get_file(){
 	fileobj.click();
 }
 
+
 function file_upload( file ){
 	var lat = window.lat;
 	var lon = window.lon;
@@ -162,3 +150,35 @@ function file_upload( file ){
 
 	xhr.send(fd);
 }
+
+
+// -----------------------------------------------------------------------------
+// code runs on import
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+update();
