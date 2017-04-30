@@ -119,13 +119,15 @@ def sms_reply():
 		state = request.values.get('FromState')
 		city = request.values.get('FromCity')
 
-		lat, lon = get_long_lat( country, state, city )
+		location = [ l.strip() for l in message_body.split(',') if l ]
+		if len(location)==2 and isfloat( location[0] ) and isfloat( location[1] ):
+			lat = location[0]
+			lon = location[1]
+		else:
+			lat, lon = get_long_lat( country, state, city )
+
 		danger_level = alert_level( lat, lon )
 		level = alert_level_str( danger_level )
-		#location = [ v.strip() for v in message_body.split(',') ]
-		#lat, lon = location[0], location[1]
-
-		#risk = alert_level(lat,lon)
 
 		response = messaging_response.MessagingResponse()
 		response.message('Your risk level is: {} ({})'.format(level,danger_level),to=number,from_='2563611265')

@@ -69,6 +69,13 @@ def alert_level(lat, lon):
 			return str(nowcast+rating)
 	return str(0+rating)
 
+def isfloat( item ):
+	try:
+		float(item)
+		return True
+	except:
+		return False
+
 def alert_level_str( level ):
 	level = float(level)
 	if level<0:
