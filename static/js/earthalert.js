@@ -43,7 +43,7 @@ function update( position ){
         });
 		map.panTo( center );
 		map.setZoom(10);
-		//init_events();
+		init_events();
 
 		window.lat = lat;
 		window.lon = lon;
