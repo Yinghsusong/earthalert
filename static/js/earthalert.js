@@ -16,6 +16,7 @@ function error( e ){
 
 function update( position ){
 	if(position){
+		try{
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
 		var center = new google.maps.LatLng( lat, lon)
@@ -43,12 +44,14 @@ function update( position ){
         });
 		map.panTo( center );
 		map.setZoom(10);
-		//init_events();
 
 		window.lat = lat;
 		window.lon = lon;
 
 		warning_level(lat,lon);
+	} catch( err ){
+		console.log( err );
+	}
 	} else {
 		get_location();
 	}
@@ -126,6 +129,7 @@ function get_file(){
 	var fileobj = document.getElementById('file_input');
 	fileobj.addEventListener('change',function(){
 		for(var i=0; i<this.files.length;i++){
+			console.log('test');
 			var file = this.files[i];
 			file_upload( file );
 		}
@@ -176,5 +180,3 @@ $("#info").on('click' , function(e) {
 
 
 update();
-
-

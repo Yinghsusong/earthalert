@@ -24,19 +24,19 @@
     <link rel="stylesheet" type="text/css" href="/static/css/normalize.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/static/css/skeleton.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/static/css/animate.css" media="screen" />
-  
+
 
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="icon" type="image/png" href="/static/img/grey-logo.png">
-    
+
 <!--Scripts
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
-    
-    
+
+
+
 
 </head>
 <body>
@@ -51,9 +51,9 @@
 		</div>
     </div>
 
-    
+
     <div id="warning_box"></div>
-    
+
         <div id="mapContainer">
             <div id="map"></div>
             <script>
@@ -71,22 +71,17 @@
                     <!-- 'https://pmmpublisher.pps.eosdis.nasa.gov/products/global_landslide_nowcast_30mn/export/Global/2017/118/global_landslide_nowcast_30mn.20170428.230000.geojson' -->
                 }
             </script>
-            <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqZYLz6Y4lJGuBatmPuHJxPt-Y75kNag&callback=initMap">
-            </script>
-
-            <input id="file_input" type="file" name="name" style="display:none;" />
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqZYLz6Y4lJGuBatmPuHJxPt-Y75kNag&callback=initMap"></script>
         </div>
 
+	<input id="file_input" type="file" name="name" style="display:none;" />
 
-	    
-    
     <div class="footer">
 			<div id="upload"><img src="/static/img/upload.png"></div>
             <div id="report"><img src="/static/img/edit.png"></div>
             <div id="info"><img src="/static/img/info.png"></div>
 	    </div>
-    
+
     <div class="modals">
             <div id="imageUploadContainer" class="displayNone">
                 <p>Upload your photos to help the community know of dangerous situations.</p>
@@ -113,11 +108,13 @@
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   	<script>
-		function init_events(){
+		EVENTS={{ events|safe }};
+		IMAGES={{ images|safe }};
+
+		function init_events( events ){
             var contentString = [];
-			var EVENTS={{ events|safe }};
-			for(var i =0; i < EVENTS.length;i++){
-				var data = EVENTS[i];
+			for(var i =0; i < events.length;i++){
+				var data = events[i];
 				contentString.push( '<div id="content">'+
 	            						'<h3 id="event_title">Landslide Report:</h3>'+
 	            						'<div id="event_description">'+
@@ -130,7 +127,7 @@
 		        	content: contentString[i]
 		        });
 				var marker = new google.maps.Marker({
-					position: {lat: parseFloat(data.latitude + 0.001*Math.random()), lng:parseFloat(data.longitude - 0.001*Math.random())},
+					position: {lat: parseFloat(data.latitude + 0.01*Math.random()), lng:parseFloat(data.longitude - 0.01*Math.random())},
 					title: 'Community Report',
                     icon: '/static/img/caution.png',
 					map: map
@@ -140,6 +137,34 @@
 				});
 			}
 		}
+
+		function init_images( images ){
+            var contentString = [];
+			var images={{ events|safe }};
+			for(var i =0; i < images.length;i++){
+				var image = images[i];
+				contentString.push( '<div id="content">'+
+	            							'<a href="' + image.path + '"><img src="' + image.path + '" /></a>' +
+	            						'</div>'+
+	            					'</div>');
+
+		        var infowindow = new google.maps.InfoWindow({
+		        	content: contentString[i]
+		        });
+				var marker = new google.maps.Marker({
+					position: {lat: parseFloat(image.latitude + 0.01*Math.random()), lng:parseFloat(image.longitude - 0.01*Math.random())},
+					title: 'User Image',
+					map: map
+				});
+				marker.addListener('click', function(){
+					infowindow.open(map, marker);
+				});
+			}
+		}
+
+		init_events( EVENTS );
+		init_images( IMAGES );
+
 	</script>
 	<script src="static/js/earthalert.js"></script>
 </body>

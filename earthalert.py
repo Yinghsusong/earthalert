@@ -23,13 +23,14 @@ LOCATION = os.path.dirname(os.path.abspath(__file__))
 
 # init the app
 app = Flask(__name__)
+app.debug = True
 
 # this is the index page. Going to http://localhost:5000/ when the
 @app.route("/")
 # project is running will bring you here
 def index():
 	events = [ e.json() for e in session.query( models.Event ).all() ]
-	images = [ e.json() for e in session.query( models.Image ).all() ]
+	images = [ e.json() for e in session.query( models.Image ).all() if e.path ]
 	url = get_geo_url()
 	return render_template( 'index.html', geo_url=url, events=events, images=images )
 
@@ -110,22 +111,34 @@ def fetch():
 
 @app.route("/sms", methods=['GET'])
 def sms_reply():
+	log = open('LOG','a')
 	try:
 		number = request.values.get('From','FROM_NOT_FOUND')
 		message_body = request.values.get('Body','BODY_NOT_FOUND')
 
-		with open('REPLY_DUMP.txt','w') as f:
-			f.write(request.values)
- 
-		#lat, lon = get_long_lat( country, state, city )
-		#risk = alert_level(lat,lon)
+		country = request.values.get('FromCountry','')
+		state = request.values.get('FromState','')
+		city = request.values.get('FromCity','')
+
+		log.write(country +'\n')
+		log.write(state +'\n')
+		log.write(city +'\n')
+
+		location = [ l.strip() for l in message_body.split(',') if l ]
+		if len(location)==2 and isfloat( location[0] ) and isfloat( location[1] ):
+			lat = location[0]
+			lon = location[1]
+		else:
+			lat, lon = get_long_lat( country, state, city )
+
+		danger_level = alert_level( lat, lon )
+		level = alert_level_str( danger_level )
 
 		response = messaging_response.MessagingResponse()
-		response.message('TEST',to=number,from_='2563611265')
+		response.message('Your risk level is: {} ({})'.format(level,danger_level),to=number,from_='2563611265')
 		return response.to_xml()
 	except Exception as e:
-		with open('REPLY_DUMP.txt','w') as f:
-			f.write(str(e))
+		log.write(str(type(e)) + ': ' + str(e) + '\n')
 
 
 @app.route("/warning_level", methods=['GET'])

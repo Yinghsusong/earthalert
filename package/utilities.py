@@ -14,7 +14,6 @@ def get_long_lat( country, state, city ):
 	lon = location['lng']
 	return lat, lon
 
-
 def get_datetime_str( days_behind=0 ):
 	date = datetime.now() - timedelta(days=days_behind)
 	return date.strftime('%Y-%m-%d')
@@ -69,3 +68,23 @@ def alert_level(lat, lon):
 			nowcast = float(feature['properties']['nowcast'])
 			return str(nowcast+rating)
 	return str(0+rating)
+
+def isfloat( item ):
+	try:
+		float(item)
+		return True
+	except:
+		return False
+
+def alert_level_str( level ):
+	level = float(level)
+	if level<0:
+		return 'Uknown'
+	elif 0 <= level < 1:
+		return 'Low'
+	elif 1 <= level < 2:
+		return 'Medium'
+	elif 2 <= level < 3:
+		return 'High'
+	else:
+		return 'Extreme'

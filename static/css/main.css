@@ -23,6 +23,10 @@
 /* Larger than phablet (also point when grid becomes active) */
 @media (min-width: 550px) {.navigation {height: 8vh; font-size: 2em;} }
 
+.content>a>img {
+	height:100px;
+	width:auto;
+}
 
 #titlecard_wrapper img {
 	height:65px;
@@ -51,7 +55,6 @@
     width: 100%;
     height: 5vh;
 }
-
 
 /*Alerts*/
 .high {
