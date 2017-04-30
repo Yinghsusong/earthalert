@@ -83,17 +83,27 @@
     
     <div class="footer">
 			<div id="upload"><img src="/static/img/upload.png"></div>
-            <div id="report" onclick="report_event();"><img src="/static/img/edit.png"></div>
-            <div id="info" onclick="report_event();"><img src="/static/img/info.png"></div>
+            <div id="report"><img src="/static/img/edit.png"></div>
+            <div id="info"><img src="/static/img/info.png"></div>
 	    </div>
     
     <div class="modals">
-            <div id="imageUploadContainer">
+            <div id="imageUploadContainer" class="displayNone">
                 <p>Upload your photos to help the community know of dangerous situations.</p>
                 <button class="button-primary" value="Upload" id="upload" onclick="get_file();" >Upload</button>
             </div>
-            <div id="editReportContainer"><p></p></div>
-            <div id="inforContainer"></div>
+            <div id="editReportContainer" class="displayNone">
+                <p>Give a brief description of your current situation.</p>
+                <input type="text" placeholder="A brief description"></input>
+                <button class="button-primary" value="Update" id="report" onclick="report_event();">Update</button>
+            </div>
+            <div id="infoContainer" class="displayNone">
+                <img src="https://placehold.it/350x150">
+                <h4>About EarthAlert</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas malesuada enim sed hendrerit varius. Pellentesque vestibulum elit ex, ut bibendum eros laoreet sit amet. Donec felis lacus, vulputate ut malesuada ac, consectetur ac eros. In orci urna, porta in tristique vitae, gravida in urna. </p>
+                <h4>Meet the Team</h4>
+                <p></p>
+            </div>
         </div>
 
 
