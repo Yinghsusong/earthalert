@@ -55,6 +55,7 @@ def report():
 
 @app.route("/upload", methods=['POST'])
 def upload():
+	log = open('LOG','a')
 	try:
 		lon = request.values.get('lon')
 		lat = request.values.get('lat')
@@ -74,7 +75,7 @@ def upload():
 			session.rollback()
 			raise
 	except Exception as e:
-		print(e)
+		log.write(e)
 	return ''
 
 

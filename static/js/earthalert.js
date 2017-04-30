@@ -127,7 +127,6 @@ function get_file(){
 	var fileobj = document.getElementById('file_input');
 	fileobj.addEventListener('change',function(){
 		for(var i=0; i<this.files.length;i++){
-			console.log('test');
 			var file = this.files[i];
 			file_upload( file );
 		}
@@ -140,17 +139,19 @@ function file_upload( file ){
 	var lat = window.lat;
 	var lon = window.lon;
 
-	var url = '/upload';
-	var xhr = new XMLHttpRequest();
-	var fd = new FormData();
-	xhr.open("POST", url, true);
+	if( file && lat && lon ){
+		var url = '/upload';
+		var xhr = new XMLHttpRequest();
+		var fd = new FormData();
+		xhr.open("POST", url, true);
 
-	fd.append("file", file);
-	fd.append("lat", lat);
-	fd.append("lon", lon);
+		fd.append("file", file);
+		fd.append("lat", lat);
+		fd.append("lon", lon);
 
 
-	xhr.send(fd);
+		xhr.send(fd);
+	}
 }
 
 // -----------------------------------------------------------------------------

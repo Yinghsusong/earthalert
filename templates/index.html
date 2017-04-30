@@ -83,6 +83,7 @@
     <div class="modals">
             <div id="imageUploadContainer" class="displayNone">
                 <p>Upload your photos to help the community know of dangerous situations.</p>
+				<input type="file" id="input_file" style="display:none;" />
                 <button class="button-primary" value="Upload" id="upload" onclick="get_file();" >Upload</button>
             </div>
             <div id="editReportContainer" class="displayNone">
@@ -182,7 +183,6 @@ We are a team of five college students from the University of Huntsville in Alab
 				var image = images[i];
 				contentString.push( '<div id="content">'+
 	            							'<a href="' + image.path + '"><img src="' + image.path + '" /></a>' +
-											'test' +
 	            						'</div>'+
 	            					'</div>');
 
