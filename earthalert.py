@@ -102,6 +102,7 @@ def fetch():
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
+	resp = MessagingResponse()
 	messages = requests.values
 	messages = messages.split(',')
 	alert = utilities.alert_level(messages[0],messages[1])
