@@ -120,13 +120,14 @@ def sms_reply():
 		city = request.values.get('FromCity')
 
 		lat, lon = get_long_lat( country, state, city )
+		danger_level = alert_level( lat, lon )
 		#location = [ v.strip() for v in message_body.split(',') ]
 		#lat, lon = location[0], location[1]
 
 		#risk = alert_level(lat,lon)
 
 		response = messaging_response.MessagingResponse()
-		response.message('lat: {} lon: {}'.format(lat,lon),to=number,from_='2563611265')
+		response.message('{}'.format(danger_level),to=number,from_='2563611265')
 		return response.to_xml()
 	except Exception as e:
 		with open('REPLY_DUMP.txt','w') as f:
