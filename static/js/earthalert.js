@@ -51,6 +51,13 @@ function update( position ){
 	}
 }
 
+function calculate_warning_level( base ){
+	for(var i=0;i<EVENTS.length;i++){
+		console.log( EVENTS[i] );
+	}
+	return base;
+}
+
 function warning_level(lat, lon){
 	var box = document.getElementById('warning_box');
 	box.innerHTML = 'Fetching Risk Level . . .';
@@ -59,7 +66,7 @@ function warning_level(lat, lon){
 
 	request.onreadystatechange = function() {
 	if (request.readyState == 4 && request.status == 200){
-			var warning_level = parseInt(request.responseText);
+			var warning_level = calculate_warning_level( parseInt(request.responseText) );
 			switch(warning_level){
 				case 0:
 					box.classList.add('low');
