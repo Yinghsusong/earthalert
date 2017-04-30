@@ -8,6 +8,8 @@ from flask import Flask, request, render_template, make_response
 import json
 import os
 
+import twiml
+
 # local imports
 from package import models
 from package.utilities import *
@@ -108,16 +110,16 @@ def fetch():
 
 @app.route("/sms", methods=['POST'])
 def sms_reply():
-    number = request.form['From']
-    message_body = request.form['Body']
+	number = request.form['From']
+	message_body = request.form['Body']
 
 	location = [ v.strip() for v in message_body.split(',') ]
 	lat, lon = location[0], location[1]
 
 	#risk = alert_level(lat,lon)
 
-    resp = twiml.Response()
-    resp.message('Hello {}, you said: {},{}'.format(number, lat, lon))
+	resp = twiml.Response()
+	resp.message('Hello {}, you said: {},{}'.format(number, lat, lon))
 	return str(resp)
 
 @app.route("/warning_level", methods=['GET'])
