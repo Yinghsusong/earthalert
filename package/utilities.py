@@ -1,11 +1,12 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import requests
 from pprint import pprint
 import json
 from shapely.geometry import shape, Point
 
-def get_datetime_str():
-	return datetime.now().strftime('%Y-%m-%d')
+def get_datetime_str( days_behind=0 ):
+	date = datetime.now() - timedelta(days=days_behind)
+	return date.strftime('%Y-%m-%d')
 
 def get_geo_json( lat=0, lon=0 ):
 	url = get_geo_url( lat, lon )
@@ -16,10 +17,9 @@ def get_geo_url( lat=0, lon=0 ):
 	lat_value = 'lat=' + str(lat)
 	lon_value = 'lon=' + str(lon)
 	limit = 'limit=1'
-	startTime = 'startTime=' + str(get_datetime_str())
-	endTime = 'endTime=' + str(get_datetime_str())
+	startTime = 'startTime=' + get_datetime_str(1)
+	endTime = 'endTime=' + get_datetime_str()
 	url = '&'.join([base_url, lat_value, lon_value, limit, startTime, endTime])
-	
 	results = requests.get(url)
 	json_data = results.json()
 	for key,value in json_data.items():
