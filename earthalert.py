@@ -120,7 +120,8 @@ def sms_reply():
 
 		#risk = alert_level(lat,lon)
 
-		response = messaging_response.MessagingResponse(body='TEST',to=number,from_='2563611265')
+		response = messaging_response.MessagingResponse()
+		response.message('TEST',to=number,from_='2563611265')
 		with open('REPLY_DUMP.txt','w') as f:
 			f.write(response.to_xml())
 
