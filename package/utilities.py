@@ -2,7 +2,8 @@ from datetime import datetime, timedelta
 import requests
 from pprint import pprint
 import json
-from shapely.geometry import shape, Point
+import matplotlib.path as matpath
+import numpy as np
 
 def get_datetime_str( days_behind=0 ):
 	date = datetime.now() - timedelta(days=days_behind)
@@ -69,19 +70,12 @@ def alert_level(lat, lon):
 	geo_json=get_geo_json()
 	danger_level = 0
 	js = json.loads(geo_json)
-	#with open(geo_json) as f:
-	 #   js = json.load(f)
-
-	# construct point based on lon/lat returned by geocoder
-	point = Point(float(lat), float(lon))
 
 	# check each polygon to see if it contains the point
 	for feature in js['features']:
-		polygon = shape(feature['geometry'])
-		center = polygon.centroid
-		if polygon.contains(point):
-			# print('Found containing polygon:', feature)
-			danger_level = feature['properties']['nowcast']
-	return str(danger_level)
-
-get_geo_url()
+		poly = feature['geometry']['coordinates'][0]
+		path = matpath.Path(np.array(poly))
+		inside = path.contains_point((float(lat),float(lon)))
+		if inside:
+			return str(feature['properties']['nowcast'])
+	return str(0)
