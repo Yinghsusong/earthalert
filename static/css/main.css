@@ -1,118 +1,63 @@
 /*The "main" css page with global styling
  */
-
-
-
-/*Initial Loading Container
-____________________________________*>
-
-
-/* Big Stuffs*/
-.content {
-    z-index: 0;
-}
-
-
-#map {
-    height: 100%;
+* {
+	font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
 }
 
 
 /* Navigation */
 .navigation {
     display: flex;
-    position: fixed;
-    height: 8vh;
+    height: 10vh;
     background-color: #f2f2f2;
-    color: #2d2d2d; 
+    color: #2d2d2d;
     width: 100%;
-    letter-spacing: 0.5em;
-    z-index: 10;
     letter-spacing: 0.6em;
     text-transform: uppercase;
     font-size: 1em;
     text-align: center;
-    padding-top: 1%;
-}
-
-
-.navLogo {
-    float: left;
+	align-items:center;
 }
 
 .navigation img {
-    width: 30%;
+	height:100%;
+	width:auto;
 }
 
-
-.headerText {padding-top: 15px;}
-.headerText p {margin-bottom: 0em;}
-
-
-
-.navigation ul li {
-    float: right;
-    padding-right: 8%;
-    list-style: none;
+#map {
+	height: 80vh;
+	border: 1px solid black;
 }
-
-.numberRequest{
-    display: flex;
-    width: 100%;
-    background-color: #e04a3c;
-    color: white;
-    margin-top: 10vh;
-    position: fixed;
-    }
-
-
-
-
 
 /*Footer */
-
 .footer {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    height: 8vh;
-    background-color: #24292e;
-    color: white;
-    width: 100%;
-    text-transform: uppercase;
-    letter-spacing: 0.5em;
-    text-align: center;
+	display: flex;
+	position:fixed;
+	bottom:0;
+	background-color: #24292e;
+	height:10vh;
+	width: calc(100% - 16px);
+	align-items:center;
+	align-content:space-between;
 }
 
-.footer ul li {
-    float:left;
-    padding-right: 8%;
-    width: 25%;
-    list-style: none;
-    
+.footer div {
+	flex-grow:1;
+	display: flex;
+	align-items:center;
+	justify-content:center;
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 0.5em;
 }
 
 .footer img {
+	max-height:10vh;
 }
 
 
-
-
-/* Larger than mobile */
-@media (min-width: 400px) {
-    
-    
+@media (max-width: 400px) {
+	.footer>div>span{
+		display:none;
+	}
 }
-
-
-/*Landing Container*/
-
-/*Search Container */
-
-/*Reporting Container*/
-
-
-
-
-
-
