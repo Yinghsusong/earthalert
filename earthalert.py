@@ -23,6 +23,7 @@ LOCATION = os.path.dirname(os.path.abspath(__file__))
 
 # init the app
 app = Flask(__name__)
+app.debug = True
 
 # this is the index page. Going to http://localhost:5000/ when the
 @app.route("/")
