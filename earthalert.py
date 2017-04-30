@@ -116,7 +116,7 @@ def sms_reply():
 
 		with open('REPLY_DUMP.txt','w') as f:
 			f.write(request.values)
-
+ 
 		#lat, lon = get_long_lat( country, state, city )
 		#risk = alert_level(lat,lon)
 
