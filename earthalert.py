@@ -138,7 +138,7 @@ def sms_reply():
 		response.message('Your risk level is: {} ({})'.format(level,danger_level),to=number,from_='2563611265')
 		return response.to_xml()
 	except Exception as e:
-		log.write(str(e) + '\n')
+		log.write(str(type(e)) + ': ' + str(e) + '\n')
 
 
 @app.route("/warning_level", methods=['GET'])
