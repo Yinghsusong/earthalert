@@ -115,6 +115,10 @@ def sms_reply():
 		number = request.values.get('From','FROM_NOT_FOUND')
 		message_body = request.values.get('Body','BODY_NOT_FOUND')
 
+		with open('REQUESTDUMP.txt','w') as f:
+			f.write(request.values)
+
+		# lat, lon = get_long_lat( country, state, city )
 		#location = [ v.strip() for v in message_body.split(',') ]
 		#lat, lon = location[0], location[1]
 
@@ -122,9 +126,6 @@ def sms_reply():
 
 		response = messaging_response.MessagingResponse()
 		response.message('TEST',to=number,from_='2563611265')
-		with open('REPLY_DUMP.txt','w') as f:
-			f.write(response.to_xml())
-
 		return response.to_xml()
 	except Exception as e:
 		with open('REPLY_DUMP.txt','w') as f:
