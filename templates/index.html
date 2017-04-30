@@ -13,8 +13,8 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  ––––––––––––––––––––––––––––––––––––––––––––––––––
+  <!--Font
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
   <!-- CSS
@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/main.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/static/css/normalize.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/static/css/skeleton.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/static/css/animate.css" media="screen" />
   
 
   <!-- Favicon
@@ -32,23 +33,16 @@
 <body>
 
   <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
     <div class="navigation">
 		<div id="titlecard_wrapper">
 			<img src="/static/img/grey-logo.png">
 			<div id="header_text">Slide</div>
 		</div>
-		<div id="warning_box"></div>
     </div>
 
-    <div id ="myModal" class = "modal">
-      <div class = "modal-content">
-        <span class = "close">&times;</span>
-        <p> Just some text</p>
-      </div>
-    </div>
-
+    <div id="warning_box"></div>
 	<div class="content">
 		<div id="map"></div>
 		<script>
@@ -73,9 +67,10 @@
 		<input id="file_input" type="file" name="name" style="display:none;" />
 
 	    <div class="footer">
-			<div id="upload" onclick="get_file();" ><img src="/static/img/upload.png"><span>Upload</span></div>
-			<div id="report" onclick="report_event();"><img src="/static/img/edit.png"><span>Report</span></div>
-	        <button id = "myBtn">Open Modal</button>
+			<div id="upload" onclick="get_file();" ><img src="/static/img/upload.png"></div>
+            <div id="report" onclick="report_event();"><img src="/static/img/edit.png"></div>
+            <div id="info" onclick="report_event();"><img src="/static/img/info.png"></div>
+            
 	    </div>
     </div><!--Main Website Content -->
 
