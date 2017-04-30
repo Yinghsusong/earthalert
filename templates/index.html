@@ -14,93 +14,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  ––––––––––––––––––––––––––––––––––––––––––––––––––
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> -->
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" type="text/css" href="../static/css/normalize.css" media="screen" />
-  <link rel="stylesheet" type="text/css" href="../static/css/skeleton.css" media="screen" />
-  <link rel="stylesheet" type="text/css" href="../static/css/main.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="/static/css/main.css" media="screen" />
 
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" type="image/png" href="/static/img/grey-logo.png">
 
 </head>
 <body>
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div class="navigation overlay">
-        <div class="navLogo">
-            <img src="../static/images/grey-logo.png">
-        </div>
-        <div class="headerText"><p>Slide</p></div>
-        
-    </div>
-    <div class="numberRequest overlay" style="z-index:15">
-        <div class="nrText">Give us your number for up to the minute reporting!</div>
-        <div class="nrField">
-            <input placeholder="0 000 555 555" id="numberRequestField" type="number">
-        </div>
-    </div>
-    
-    
-<div class="content">    
-    <div class="landingContainer">       
-
-
-<div class="content">
-    <div class="landingContainer">
-
-  <div id="map"></div>
-    <script>
-      var map;
-	  function initMap() {
-		  map = new google.maps.Map(document.getElementById('map'), {
-		    zoom: 8,
-		    minZoom: 2,
-		    maxZoom: 10,
-		    center: {lat: -28, lng: 137}
-			});
-
-		  map.data.setStyle({ fillColor:'red' });
-		  map.data.loadGeoJson('https://pmmpublisher.pps.eosdis.nasa.gov/products/global_landslide_nowcast_30mn/export/Global/2017/118/global_landslide_nowcast_30mn.20170428.230000.geojson');
-		}
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqZYLz6Y4lJGuBatmPuHJxPt-Y75kNag&callback=initMap"
-    async defer></script>
-
-  </div><!--Landing Container -->
-        </div><!--Landing Container -->
-
-    <div class="searchContainer">
-        <div class="container">
-        </div>
+    <div class="navigation">
+		<img src="/static/img/grey-logo.png">
+		<div class="header_text">Slide</div>
     </div>
 
-    <div class="reportingContainer">
-        <div class="container">
-        </div>
-    </div>
+	<div class="content">
+		<div id="map"></div>
+		<script>
+			var map;
+			function initMap(){
+				map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 8,
+					minZoom: 2,
+					maxZoom: 10,
+					center: {lat: -28, lng: 137}
+				});
+				map.data.setStyle({ fillColor:'red' });
+				map.data.loadGeoJson('https://pmmpublisher.pps.eosdis.nasa.gov/products/global_landslide_nowcast_30mn/export/Global/2017/118/global_landslide_nowcast_30mn.20170428.230000.geojson');
+			}
+		</script>
+		<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqZYLz6Y4lJGuBatmPuHJxPt-Y75kNag&callback=initMap">
+		</script>
 
-
-
-
-
-    <div class="footer overlay">
-        <div class="container">
-        <div class="footerLinks">
-            <ul>
-                <li><img src="../static/images/upload.png">Upload</li>
-                <li><img src="../static/images/search.png">Search</li>
-                <li><img src="../static/images/edit.png">Reporting</li>
-            </ul>
-        </div>
-        </div>
-    </div>
+	    <div class="footer">
+			<div><img src="/static/img/upload.png"><span>Upload</span></div>
+			<div><img src="/static/img/search.png"><span>Search</span></div>
+			<div><img src="/static/img/edit.png"><span>Reporting</span></div>
+	    </div>
 
     </div><!--Main Website Content -->
 
