@@ -48,6 +48,18 @@ class Person(Base):
 		self.latitude = latitude
 		self.longitude = longitude
 
+class Image(Base):
+	__tablename__= 'images'
+	id = Column(Integer, primary_key=True)
+	path = Column(String(500), unique=True)
+	latitude = Column(String(250))
+	longitude = Column(String(250))
+
+	def __init__(self, latitude, longitude, path):
+		self.path = path
+		self.latitude = latitude
+		self.longitude = longitude
+
 if __name__=='__main__':
 	db_engine = create_engine( 'sqlite:///earthalert.db' )
 	Base.metadata.create_all(db_engine)

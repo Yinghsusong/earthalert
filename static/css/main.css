@@ -86,6 +86,10 @@
 	cursor:pointer;
 }
 
+#upload {
+	cursor:pointer;
+}
+
 .footer img {
 	max-height:10vh;
 }

@@ -61,12 +61,10 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqZYLz6Y4lJGuBatmPuHJxPt-Y75kNag&callback=initMap">
 		</script>
 
-		<form id="fileupload"action="/upload" style="display:none;">
-			<input id="file-input" type="file" name="name" style="display:none;" />
-		</form>
+		<input id="file_input" type="file" name="name" style="display:none;" />
 
 	    <div class="footer">
-			<div onclick="get_file();" ><img src="/static/img/upload.png"><span>Upload</span></div>
+			<div id="upload" onclick="get_file();" ><img src="/static/img/upload.png"><span>Upload</span></div>
 			<div id="report" onclick="report_event();"><img src="/static/img/edit.png"><span>Report</span></div>
 	    </div>
     </div><!--Main Website Content -->

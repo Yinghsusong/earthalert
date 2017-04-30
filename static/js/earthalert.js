@@ -33,7 +33,7 @@ function update( position ){
 		var marker = new google.maps.Marker({
           position: {lat: lat, lng:lon},
           title: 'Your Position',
-          icon: 'http://maps.google.com/mapfiles/kml/shapes/homegardenbusiness.png', 
+          icon: 'http://maps.google.com/mapfiles/kml/shapes/homegardenbusiness.png',
           size: 8,
           map: map
         });
@@ -105,6 +105,29 @@ function report_event(){
 }
 
 function get_file(){
-	var fileobj = document.getElementById('file-input');
+	var fileobj = document.getElementById('file_input');
+	fileobj.addEventListener('change',function(){
+		for(var i=0; i<this.files.length;i++){
+			var file = this.files[i];
+			file_upload( file );
+		}
+	})
 	fileobj.click();
+}
+
+function file_upload( file ){
+	var lat = window.lat;
+	var lon = window.lon;
+
+	var url = '/upload';
+	var xhr = new XMLHttpRequest();
+	var fd = new FormData();
+	xhr.open("POST", url, true);
+
+	fd.append("file", file);
+	fd.append("lat", lat);
+	fd.append("lon", lon);
+
+
+	xhr.send(fd);
 }
