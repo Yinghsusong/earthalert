@@ -22,14 +22,14 @@ function update( position ){
             '</div>'+
             '<h1 id="firstHeading" class="firstHeading">Your Position</h1>'+
             '<div id="bodyContent">'+
-            '<p><b>Refer to box at upper right for your current threat level</b></p>'+
+            '<p><b>Refer to box at upper right for your current threat level</b></p>'+ <p> 
             '</div>'+
             '</div>';
 
         var infowindow = new google.maps.InfoWindow({
         	content: contentString
         });
-        
+
 		var marker = new google.maps.Marker({
           position: {lat: lat, lng:lon},
           title: 'Your Position',
