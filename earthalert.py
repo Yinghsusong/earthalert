@@ -27,8 +27,8 @@ app = Flask(__name__)
 @app.route("/")
 def index():
 	events = [ e.json() for e in session.query( models.Event ).all() ]
-	geo_url = get_geo_url()
-	return render_template( 'index.html', geo_url=geo_url, events=events )
+	url = get_geo_url()
+	return render_template( 'index.html', geo_url=url, events=events )
 
 @app.route("/report", methods=['GET'])
 def report():
