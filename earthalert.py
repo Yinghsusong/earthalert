@@ -117,9 +117,9 @@ def sms_reply():
 
 		log = open('LOG','a')
 
-		country = request.values.get('FromCountry')
-		state = request.values.get('FromState')
-		city = request.values.get('FromCity')
+		country = request.values.get('FromCountry','')
+		state = request.values.get('FromState','')
+		city = request.values.get('FromCity','')
 
 		log.write(country +'\n')
 		log.write(state +'\n')
