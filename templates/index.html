@@ -25,8 +25,6 @@
     <link rel="stylesheet" type="text/css" href="/static/css/skeleton.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/static/css/animate.css" media="screen" />
 
-
-
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="icon" type="image/png" href="/static/img/grey-logo.png">
@@ -74,13 +72,12 @@
             </script>
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqZYLz6Y4lJGuBatmPuHJxPt-Y75kNag&callback=initMap"></script>
         </div>
-
 	<input id="file_input" type="file" name="name" style="display:none;" />
-    
     <div class="footer">
 			<div id="upload" onClick="toggle_display('imageUploadContainer');"><img src="/static/img/upload.png" /></div>
             <div id="report" onClick="toggle_display('editReportContainer');"><img src="/static/img/edit.png" /></div>
             <div id="info" onClick="toggle_display('infoContainer');"><img src="/static/img/info.png" /></div>
+            <div id="sms" onClick="toggle_display('smsPrep');"><img src="/static/img/smsPrep.png"></div>
     </div>
 
     <div class="modals">
@@ -90,15 +87,34 @@
             </div>
             <div id="editReportContainer" class="displayNone">
                 <p>Give a brief description of your current situation.</p>
-                <input type="text" placeholder="A brief description"></input>
-                <button class="button-primary" value="Update" onclick="report_event();">Update</button>
+                <input id="description" type="text" placeholder="A brief description"></input>
+                <button class="button-primary" value="Update" type="submit" onClick="report_event();">Update</button>
             </div>
             <div id="infoContainer" class="displayNone">
-                <img src="https://placehold.it/350x150">
+                <img style="max-width:100%;" src="https://placehold.it/350x150">
                 <h4>About EarthAlert</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas malesuada enim sed hendrerit varius. Pellentesque vestibulum elit ex, ut bibendum eros laoreet sit amet. Donec felis lacus, vulputate ut malesuada ac, consectetur ac eros. In orci urna, porta in tristique vitae, gravida in urna. </p>
-                <h4>Meet the Team</h4>
+                <p>At Earth Alert, we don't think you should have to use an API to view life-saving information. By enabling access to existing NASA resources, we are able to provide vital data to those who need it most. Moreover, we believe in the power of community contributions and allowing individuals to help themselves and those around them by adding on-the-ground information which can enable emergency responders to effectively respond where they are needed. 
+<h4>Team</h4>
+We are a team of five college students from the University of Huntsville in Alabama and Case Western Reserve University in Cleveland. Our backgrounds range from mechanical engineering to art animation to computer science. We are passionate about many things including Python, web development, and hard problems in general. Despite officially meeting all together for the first time on Saturday morning of the NASA Space Apps Challenge, we bonded quickly over the 36-hour sprint to make SLIDE. As a team, we have been able to utilize our different backgrounds in order to create an application that we not only take great pride in, but that can actively improve the world by democratizing access to information.
+
+<h4>Contact Info</h4><br>
+<b>SMS Notification Number</b> 256-361-1265<br>
+<b>Email account</b> earthalertspace@gmail.com<br>
+<b>YouTube Account</b> https://goo.gl/BMV4Cn<br>
+<b>Twitter</b> https://goo.gl/WIdi0F<br>
                 <p></p>
+            </div>
+            <div id="smsPrep" class="displayNone">
+                <h4>SMS Messaging Instructions:</h3>
+                <h4 >Text This Number: <span style="text-decoration:underline; color: red;">(256)361-1265</span></h4>
+<p>Two options are available for receiving a threat level via SMS messaging. Sending a message with content other than numbers (or no content) will return the calculated threat level for your geographic location. A message sent in the format lat, lon will return the calculated threat level for those precise coordinates. The threat level is calculated from the NASA Global Landslide Nowcast combined with socioeconomic data and user submitted reports. Threat levels are as follows:</p>
+    <ul>
+<li><b>0-1 Low:</b> Little or no landslide risk, no action necessary</li>
+<li><b>1-2 Moderate:</b> Slight landslide risk, check again if conditions worse</li>
+<li><b>1-3 Medium:</b> Considerable landslide risk, actively monitor conditions</li>
+<li><b>3-4 High:</b> Elevated landslide risk, stay alert and develop an emergency plan</li>
+<li><b>4+ Extreme:</b> Significant risk for imminent landslide, prepare for evacuation</li>
+    </ul>
             </div>
         </div>
 
@@ -109,8 +125,6 @@
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   	<script>
-        var LAST = None;
-        
         function toggle_display( name ){
             var e = document.getElementById(name);
             clear_displays( e );
@@ -184,7 +198,9 @@
 				});
 			}
 		}
-
+        
+        window.EVENTS = EVENTS;
+        
 		init_events( EVENTS );
 		init_images( IMAGES );
 

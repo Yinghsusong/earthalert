@@ -54,11 +54,12 @@ function update( position ){
 }
 
 function calculate_warning_level( base, lat, lon ){
+    var events = window.EVENTS;
 	var base = parseFloat( base );
 	var lat = parseFloat( lat );
 	var lon = parseFloat( lon );
-	for(var i=0;i<EVENTS.length;i++){
-		item = EVENTS[i];
+	for(var i=0;i<events.length;i++){
+		item = events[i];
 		diff = {
 			'x': Math.abs( parseFloat(item.latitude) ) - Math.abs( lat ),
 			'y': Math.abs( parseFloat(item.longitude) ) - Math.abs( lon ),
@@ -106,7 +107,8 @@ function warning_level(lat, lon){
 }
 
 function report_event(){
-	var desc = window.prompt("You are reporting a landslide event in your area. Please provide a short description.","");
+	var desc = document.getElementById('description').value;
+    document.getElementById('editReportContainer').className='displayNone';
 	var lat = window.lat;
 	var lon = window.lon;
 	if(lon&&lat){

@@ -53,7 +53,6 @@
 #warning_box {
 	text-transform:capitalize;
     width: 100%;
-    height: 5vh;
     font-weight: 300;
     font-size: 0.5em;
     padding-left: 1em;
@@ -78,6 +77,7 @@
 .low {
 	background-color:green;
 	color:white;
+    margin-left: auto;
 }
 .unkn {
 	background-color:white;
@@ -88,7 +88,7 @@
 
 
 #map {
-	height: 100vh;
+	height: 90vh;
     max-width: 100vw;
 }
 
@@ -99,9 +99,9 @@
 
 #imageUploadContainer {background-color: #f7f7f7; position: absolute; height:50%; width: 50%;}
 #imageUploadContainer {text-align: center; color:#a0a0a0; padding-top: 2.5em;}
-@media (min-width: 320px) {#imageUploadContainer {width: 80%; height: 30%; margin-left:10%; top:56vh;}}
-@media (min-width: 550px) {#imageUploadContainer {width: 70%; height: 40%; top: 45vh;}}
-@media (min-width: 750px) {#imageUploadContainer {width: 45%; height: 30%; top: 55vh;}}
+@media (min-width: 320px) {#imageUploadContainer {width: 80%; height: 25%; margin-left:10%; top:50vh;}}
+@media (min-width: 550px) {#imageUploadContainer {width: 70%; height: 25%; top: 50vh;}}
+@media (min-width: 750px) {#imageUploadContainer {width: 45%; height: 25%; top: 50vh;}}
 @media (min-width: 1000px) {#imageUploadContainer {width: 30%; height: 23%; top:65vh;}}
 @media (min-width: 1200px) {#imageUploadContainer {width: 30%; height: 23%; top: 54vh;}}
 
@@ -114,14 +114,29 @@
 @media (min-width: 1200px) {#editReportContainer {width: 30%; height: 23%; top: 54vh;}}
 
 #infoContainer {background-color: #f7f7f7; position: absolute; height:50%; width: 50%; overflow-y: scroll;}
-#infoContainer {text-align: center; color:#a0a0a0; padding-top: 2.5em;}
+#infoContainer {text-align: left; color:#a0a0a0; padding-top: 2.5em; padding-left: 1.5em;}
 @media (min-width: 320px) {#infoContainer {width: 80%; height: 60%; margin-left:10%; top:20vh;}}
 @media (min-width: 550px) {#infoContainer {width: 70%; height: 60%; top: 17vh; margin-left:20%;}}
 @media (min-width: 750px) {#infoContainer {width: 45%; height: 60%; top: 20vh; margin-left: 45%;}}
 @media (min-width: 1000px) {#infoContainer {width: 30%; height: 62%; top:17vh; margin-left: 59%;}}
 @media (min-width: 1200px) {#infoContainer {width: 30%; height: 62%; top: 17vh;margin-left: 59%;}}
 
+#smsPrep {background-color: #f7f7f7; position: absolute; height:50%; width: 50%; overflow-y: scroll;}
+#smsPrep { paddingcolor:#a0a0a0; padding-top: 2.5em;}
+#smsPrep p {text-indent: 0.5em;}
+#smsPrep ul li {list-style: none;}
+@media (min-width: 320px) {#smsPrep {width: 80%; height: 60%; margin-left:10%; top:20vh; padding-left: 1.2em;}}
+@media (min-width: 550px) {#smsPrep {width: 70%; height: 60%; top: 17vh; margin-left:20%;}}
+@media (min-width: 750px) {#smsPrep {width: 45%; height: 60%; top: 20vh; margin-left: 45%;}}
+@media (min-width: 1000px) {#smsPrep {width: 30%; height: 62%; top:17vh; margin-left: 59%;}}
+@media (min-width: 1200px) {#smsPrep {width: 30%; height: 62%; top: 17vh;margin-left: 59%;}}
 
+
+/*SMS Modal */
+#menuOpen {
+    position:fixed;
+    padding-top: 60vh
+    }
 
 
 
