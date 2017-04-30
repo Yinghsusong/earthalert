@@ -12,16 +12,29 @@
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-  <!-- FONT
-  ––––––––––––––––––––––––––––––––––––––––––––––––––
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> -->
+  <!--Font
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<<<<<<< HEAD
   <link rel="stylesheet" type="text/css" href="/static/css/main.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="/static/css/animate.css" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="/static/css/skeleton.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="/static/css/normalize.css" media="screen" />
+=======
+
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/static/css/normalize.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/static/css/skeleton.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/static/css/animate.css" media="screen" />
 
 
+
+>>>>>>> 9acf13b7d111f096c7dafada4222a9884a02be81
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="/static/img/grey-logo.png">
@@ -30,23 +43,24 @@
 <body>
 
   <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
     <div class="navigation">
 		<div id="titlecard_wrapper">
 			<img src="/static/img/grey-logo.png">
 			<div id="header_text">Slide</div>
 		</div>
-		<div id="warning_box"></div>
     </div>
 
-    <div id ="myModal" class = "modal">
-      <div class = "modal-content">
-        <span class = "close">&times;</span>
-        <p> Just some text</p>
-      </div>
-    </div>
+<<<<<<< HEAD
+=======
 
+    <div id="warning_box"></div>
+
+>>>>>>> 9acf13b7d111f096c7dafada4222a9884a02be81
+
+
+    <div id="warning_box"></div>
 	<div class="content">
 		<div id="map"></div>
 		<script>
@@ -68,9 +82,12 @@
 		<input id="file_input" type="file" name="name" style="display:none;" />
 
 	    <div class="footer">
-			<div id="upload" onclick="get_file();" ><img src="/static/img/upload.png"><span>Upload</span></div>
-			<div id="report" onclick="report_event();"><img src="/static/img/edit.png"><span>Report</span></div>
-	        <button id = "myBtn">Open Modal</button>
+
+			<div id="upload" onclick="get_file();" ><img src="/static/img/upload.png"></div>
+            <div id="report" onclick="report_event();"><img src="/static/img/edit.png"></div>
+            <div id="info" onclick="information();"><img src="/static/img/info.png"></div>
+
+
 	    </div>
     </div><!--Main Website Content -->
 
@@ -144,5 +161,9 @@
 
 	</script>
 	<script src="static/js/earthalert.js"></script>
+  <script>
+
+  </script>
+
 </body>
 </html>
