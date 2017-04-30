@@ -25,8 +25,8 @@ LOCATION = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
 
 # this is the index page. Going to http://localhost:5000/ when the
-# project is running will bring you here
 @app.route("/")
+# project is running will bring you here
 def index():
 	events = [ e.json() for e in session.query( models.Event ).all() ]
 	images = [ e.json() for e in session.query( models.Image ).all() ]
@@ -120,7 +120,7 @@ def sms_reply():
 
 		#risk = alert_level(lat,lon)
 
-		response = messaging_response.Message('Hi')
+		response = messaging_response.MessagingResponse(body='TEST',to=number,from_='2563611265')
 		with open('REPLY_DUMP.txt','w') as f:
 			f.write(response.to_xml())
 
