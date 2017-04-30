@@ -23,16 +23,24 @@ app = Flask(__name__)
 # project is running will bring you here
 @app.route("/")
 def index():
-	events = session.query( models.Event ).all()
+	events = [ e.json() for e in session.query( models.Event ).all() ]
 	geo_url = get_geo_url()
-	return render_template( 'index.html', geo_url=geo_url )
+	return render_template( 'index.html', geo_url=geo_url, events=events )
 
-@app.route("/report", methods=['POST'])
+@app.route("/report", methods=['GET'])
 def report():
+	desc = request.values.get('desc')
 	lat = request.values.get('lat')
 	lon = request.values.get('lon')
-	event = Event( lat, lon )
-	session.add(  )
+	event = models.Event( lat, lon, desc )
+	try:
+		session.add( event )
+		session.commit()
+		return 'GOOD'
+	except Exception as e:
+		session.rollback()
+		print(e)
+		return 'BAD'
 
 @app.route("/notify_me", methods=[ 'GET', 'POST'])
 def notify_me():

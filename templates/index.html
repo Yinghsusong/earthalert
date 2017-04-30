@@ -61,9 +61,13 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqqZYLz6Y4lJGuBatmPuHJxPt-Y75kNag&callback=initMap">
 		</script>
 
+		<form id="fileupload"action="/upload" style="display:none;">
+			<input id="file-input" type="file" name="name" style="display:none;" />
+		</form>
+
 	    <div class="footer">
-			<div><img src="/static/img/upload.png"><span>Upload</span></div>
-			<div onclick="report_event()"><img src="/static/img/edit.png"><span>Report</span></div>
+			<div onclick="get_file();" ><img src="/static/img/upload.png"><span>Upload</span></div>
+			<div id="report" onclick="report_event();"><img src="/static/img/edit.png"><span>Report</span></div>
 	    </div>
     </div><!--Main Website Content -->
 
@@ -73,7 +77,33 @@
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="static/js/earthalert.js"></script>
-  <script src="static/js/d3-geo.min.js"></script>
+  	<script>
+		function init_events(){
+			var EVENTS={{ events|safe }};
+			for(var i =0; i < EVENTS.length;i++){
+				var data = EVENTS[i];
+				var contentString = '<div id="content">'+
+	            						'<h3 id="event_title">Landslide Report:</h3>'+
+	            						'<div id="event_description">'+
+	            							'<p>' + data.description + '</p>' +
+											'<b>(' + data.datetime + ')</b>'+
+	            						'</div>'+
+	            					'</div>';
+
+		        var infowindow = new google.maps.InfoWindow({
+		        	content: contentString
+		        });
+				var marker = new google.maps.Marker({
+					position: {lat: parseInt(data.latitude), lng:parseInt(data.longitude)},
+					title: 'Landslide Report',
+					map: map
+				});
+				marker.addListener('click', function(){
+					infowindow.open(map, marker);
+				});
+			}
+		}
+	</script>
+	<script src="static/js/earthalert.js"></script>
 </body>
 </html>

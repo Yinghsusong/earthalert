@@ -40,6 +40,7 @@ function update( position ){
         });
 		map.panTo( center );
 		map.setZoom(10);
+		init_events();
 
 		window.lat = lat;
 		window.lon = lon;
@@ -86,9 +87,22 @@ function warning_level(lat, lon){
 update();
 
 function report_event(){
-	var description = window.prompt("You are reporting a landslide event in your area. Please provide a short description.","");
-	if(description){
-		console.log(window.lat);
-		console.log(window.lon);
+	var desc = window.prompt("You are reporting a landslide event in your area. Please provide a short description.","");
+	var lat = window.lat;
+	var lon = window.lon;
+	if(lon&&lat){
+		var request = new XMLHttpRequest();
+		url = '/report?lon='+lon+'&lat='+lat+'&desc='+desc;
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200){
+			}
+		}
+		request.open("GET", url, true); // true for asynchronous
+		request.send(null);
 	}
+}
+
+function get_file(){
+	var fileobj = document.getElementById('file-input');
+	fileobj.click();
 }
