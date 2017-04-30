@@ -23,6 +23,10 @@ function update( position ){
         });
 		map.panTo( center );
 		map.setZoom(10);
+
+		window.lat = lat;
+		window.lon = lon;
+
 		warning_level(lat,lon);
 	} else {
 		get_location();
@@ -30,13 +34,14 @@ function update( position ){
 }
 
 function warning_level(lat, lon){
+	var box = document.getElementById('warning_box');
+	box.innerHTML = 'Fetching Risk Level . . .';
 	var request = new XMLHttpRequest();
 	url = '/warning_level?lon='+lon+'&lat='+lat;
 
 	request.onreadystatechange = function() {
 	if (request.readyState == 4 && request.status == 200){
 			var warning_level = parseInt(request.responseText);
-			var box = document.getElementById('warning_box');
 			switch(warning_level){
 				case 0:
 					box.classList.add('low');
@@ -62,3 +67,11 @@ function warning_level(lat, lon){
 }
 
 update();
+
+function report_event(){
+	var description = window.prompt("You are reporting a landslide event in your area. Please provide a short description.","");
+	if(description){
+		console.log(window.lat);
+		console.log(window.lon);
+	}
+}

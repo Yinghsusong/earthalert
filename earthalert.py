@@ -73,15 +73,17 @@ def fetch():
 def sms_reply():
 	messages = requests.values
 	print(messages['msg'])
-    resp = MessagingResponse()
+	resp = MessagingResponse()
 
-    resp.message("test msg")
-    return str(resp)
+	resp.message("test msg")
+	return str(resp)
 
-@app.route("/warning_level", methods=['POST'])
+@app.route("/warning_level", methods=['GET'])
 def warning_level():
-	alert_level = request.values.get('alert_level')
-	print(alert_level)
+	lat = request.values.get('lat')
+	lon = request.values.get('lon')
+	level = alert_level(lat,lon)
+	return str(level)
 
 if __name__ == "__main__":
 	app.debug = True
