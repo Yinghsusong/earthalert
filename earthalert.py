@@ -115,8 +115,8 @@ def sms_reply():
 		number = request.values.get('From','FROM_NOT_FOUND')
 		message_body = request.values.get('Body','BODY_NOT_FOUND')
 
-		with open('REQUESTDUMP.txt','w') as f:
-			f.write(request.values)
+		with open('DUMPT.txt','w') as f:
+			f.write(str(request.values))
 
 		# lat, lon = get_long_lat( country, state, city )
 		#location = [ v.strip() for v in message_body.split(',') ]
