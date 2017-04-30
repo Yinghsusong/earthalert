@@ -55,7 +55,7 @@ function calculate_warning_level( base ){
 	//for(var i=0;i<EVENTS.length;i++){
 	//	console.log( EVENTS[i] );
 	//}
-	//return base;
+	return base;
 }
 
 function warning_level(lat, lon){
