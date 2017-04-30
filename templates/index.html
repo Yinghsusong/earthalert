@@ -92,7 +92,7 @@
                 <button class="button-primary" value="Update" type="submit" onClick="report_event();">Update</button>
             </div>
             <div id="infoContainer" class="displayNone">
-                <img style="max-width:100%;" src="https://placehold.it/350x150">
+                <img style="max-width:100%;" src="/static/img/team_logo.png">
                 <h4>About EarthAlert</h4>
                 <p>At Earth Alert, we don't think you should have to use an API to view life-saving information. By enabling access to existing NASA resources, we are able to provide vital data to those who need it most. Moreover, we believe in the power of community contributions and allowing individuals to help themselves and those around them by adding on-the-ground information which can enable emergency responders to effectively respond where they are needed.
 <h4>Team</h4>
@@ -101,8 +101,8 @@ We are a team of five college students from the University of Huntsville in Alab
 <h4>Contact Info</h4><br>
 <b>SMS Notification Number</b> 256-361-1265<br>
 <b>Email account</b> earthalertspace@gmail.com<br>
-<b>YouTube Account</b> https://goo.gl/BMV4Cn<br>
-<b>Twitter</b> https://goo.gl/WIdi0F<br>
+<a href="https://goo.gl/BMV4Cn">YouTube Account</a>
+<a href="https://goo.gl/WIdi0F">Twitter</a>
                 <p></p>
             </div>
             <div id="smsPrep" class="displayNone">
@@ -145,11 +145,8 @@ We are a team of five college students from the University of Huntsville in Alab
             }
         }
 
-
 		EVENTS={{ events|safe }};
 		IMAGES={{ images|safe }};
-
-		console.log(IMAGES);
 
 		function init_events( events ){
             var contentString = [];
@@ -183,7 +180,7 @@ We are a team of five college students from the University of Huntsville in Alab
 			for(var i =0; i < images.length;i++){
 				var image = images[i];
 				contentString.push( '<div id="content">'+
-	            							'<a href="' + image.path + '"><img src="' + image.path + '" /></a>' +
+	            							'<a href="' + image.path + '"><img src="' + image.path + '" target="_blank"/></a>' +
 	            						'</div>'+
 	            					'</div>');
 
