@@ -71,6 +71,7 @@ def fetch():
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_reply():
+	resp = MessagingResponse()
 	messages = requests.values
 	messages = messages.split(',')
 	alert = utilities.alert_level(messages[0],messages[1])
@@ -81,10 +82,8 @@ def sms_reply():
 	if alert == '2':
 		response = 'You are in a high risk zone.'
 	print(messages['msg'])
-    resp = MessagingResponse()
-
-    resp.message(response)
-    return str(resp)
+	#resp.message(response)
+	return str(resp)
 
 @app.route("/warning_level", methods=['POST'])
 def warning_level():
