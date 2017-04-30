@@ -110,16 +110,24 @@ def fetch():
 
 @app.route("/sms", methods=['GET'])
 def sms_reply():
-	number = request.values.get('From','FROM_NOT_FOUND')
-	message_body = request.values.get('Body','BODY_NOT_FOUND')
+	try:
+		number = request.values.get('From','FROM_NOT_FOUND')
+		message_body = request.values.get('Body','BODY_NOT_FOUND')
 
-	location = [ v.strip() for v in message_body.split(',') ]
-	lat, lon = location[0], location[1]
+		location = [ v.strip() for v in message_body.split(',') ]
+		lat, lon = location[0], location[1]
 
-	#risk = alert_level(lat,lon)
+		#risk = alert_level(lat,lon)
 
-	response = messaging_response.Message('Hi')
-	return response.to_xml()
+		response = messaging_response.Message('Hi')
+		with open('REPLY_DUMP.txt','w') as f:
+			f.write(response.to_xml())
+
+		return response.to_xml()
+	except Exception as e:
+		with open('REPLY_DUMP.txt','w') as f:
+			f.write(str(e))
+
 
 @app.route("/warning_level", methods=['GET'])
 def warning_level():
