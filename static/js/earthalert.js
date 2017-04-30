@@ -33,8 +33,6 @@ function update( position ){
 		var marker = new google.maps.Marker({
           position: {lat: lat, lng:lon},
           title: 'Your Position',
-          icon: 'http://maps.google.com/mapfiles/kml/shapes/homegardenbusiness.png', 
-          size: 8,
           map: map
         });
         marker.addListener('click', function(){
